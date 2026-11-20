@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology and sources | Multibagger Intelligence</title>
+<style>/* Multibagger Intelligence dashboard: calm, information-dense financial research design. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --border: #e2e5ea;
+  --text: #16191f;
+  --text-2: #4b5260;
+  --text-3: #7a8191;
+  --accent: #1f4fd1;
+  --accent-soft: #e8eefc;
+  --pos: #0f7a3d;
+  --pos-soft: #e5f4ea;
+  --neg: #b42318;
+  --neg-soft: #fbe9e7;
+  --caution: #a15c07;
+  --caution-soft: #fdf1df;
+  --unverified: #6a3fc1;
+  --unverified-soft: #efe9fb;
+  --neutral-soft: #eef0f3;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --radius: 10px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --surface: #161a20; --surface-2: #1c2128; --border: #2a3039; --text: #e7eaee; --text-2: #b4bac4;
+    --text-3: #8a919d; --accent: #7aa2ff; --accent-soft: #1d2840; --pos: #4cc285; --pos-soft: #12301f; --neg: #ff7b70;
+    --neg-soft: #3a1714; --caution: #f0b35a; --caution-soft: #3a2a10; --unverified: #b598f5; --unverified-soft: #2a2040;
+    --neutral-soft: #22272f; --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1216; --surface: #161a20; --surface-2: #1c2128; --border: #2a3039; --text: #e7eaee; --text-2: #b4bac4;
+  --text-3: #8a919d; --accent: #7aa2ff; --accent-soft: #1d2840; --pos: #4cc285; --pos-soft: #12301f; --neg: #ff7b70;
+  --neg-soft: #3a1714; --caution: #f0b35a; --caution-soft: #3a2a10; --unverified: #b598f5; --unverified-soft: #2a2040;
+  --neutral-soft: #22272f; --shadow: none;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.num, td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.muted { color: var(--text-3); }
+.small { font-size: 12.5px; }
+.tiny { font-size: 11.5px; }
+
+/* ---------------------------------------------------------------- layout */
+.app { display: grid; grid-template-columns: 228px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 4px 8px 16px; }
+.brand-mark { width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), #12a37a); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; }
+.brand-name { font-weight: 650; font-size: 13.5px; line-height: 1.2; }
+.brand-sub { font-size: 11px; color: var(--text-3); }
+.nav-group { margin: 14px 0 4px; padding: 0 8px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.nav a { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; color: var(--text-2); font-size: 13.5px; }
+.nav a:hover { background: var(--surface-2); text-decoration: none; color: var(--text); }
+.nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.main { min-width: 0; }
+.topbar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.topbar h1 { font-size: 17px; margin: 0; font-weight: 650; flex: 1 1 auto; }
+.topbar form { display: flex; gap: 6px; align-items: center; }
+.content { padding: 20px 24px 48px; max-width: 1480px; }
+.menu-btn { display: none; }
+
+.grid { display: grid; gap: 16px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.span2 { grid-column: span 2; }
+.span3 { grid-column: span 3; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; min-width: 0; }
+.card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); margin: 0 0 10px; font-weight: 650; display: flex; align-items: center; gap: 8px; }
+.card h3 { font-size: 14px; margin: 14px 0 6px; }
+.card .meta { font-size: 11.5px; color: var(--text-3); margin-top: 8px; }
+.section-title { font-size: 15px; font-weight: 650; margin: 26px 0 10px; }
+.kpi { display: flex; flex-direction: column; gap: 2px; }
+.kpi .label { font-size: 12px; color: var(--text-2); }
+.kpi .value { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.kpi .delta { font-size: 13px; font-variant-numeric: tabular-nums; }
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.flat { color: var(--text-2); }
+
+/* ---------------------------------------------------------------- badges and alerts */
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 999px; background: var(--neutral-soft); color: var(--text-2); white-space: nowrap; letter-spacing: .02em; }
+.badge.ok { background: var(--pos-soft); color: var(--pos); }
+.badge.warn { background: var(--caution-soft); color: var(--caution); }
+.badge.bad { background: var(--neg-soft); color: var(--neg); }
+.badge.unv { background: var(--unverified-soft); color: var(--unverified); }
+.badge.info { background: var(--accent-soft); color: var(--accent); }
+.alert { border-radius: 8px; padding: 10px 12px; font-size: 13px; border: 1px solid var(--border); background: var(--surface-2); margin-bottom: 10px; }
+.alert.warn { background: var(--caution-soft); border-color: color-mix(in srgb, var(--caution) 30%, transparent); }
+.alert.bad { background: var(--neg-soft); border-color: color-mix(in srgb, var(--neg) 30%, transparent); }
+.alert.info { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+.alert.synthetic { background: repeating-linear-gradient(45deg, var(--caution-soft), var(--caution-soft) 10px, var(--surface) 10px, var(--surface) 20px); border: 2px dashed var(--caution); font-weight: 700; color: var(--caution); text-align: center; letter-spacing: .08em; }
+.alert ul { margin: 6px 0 0 18px; padding: 0; }
+.banner-history { background: var(--unverified-soft); color: var(--unverified); padding: 8px 24px; font-size: 13px; border-bottom: 1px solid var(--border); }
+
+/* ---------------------------------------------------------------- tables */
+.table-wrap { overflow-x: auto; margin: 0 -4px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+th { font-size: 11.5px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .04em; background: var(--surface); position: sticky; top: 0; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable::after { content: " \2195"; color: var(--text-3); font-size: 10px; }
+th.sort-asc::after { content: " \2191"; color: var(--accent); }
+th.sort-desc::after { content: " \2193"; color: var(--accent); }
+tbody tr:hover { background: var(--surface-2); }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+input[type=text], input[type=date], input[type=search], select, textarea { font: inherit; font-size: 13px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text); }
+textarea { width: 100%; min-height: 80px; }
+button, .btn { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+button.primary, .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:hover, .btn:hover { filter: brightness(0.97); text-decoration: none; }
+
+/* ---------------------------------------------------------------- misc components */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 14px; flex-wrap: wrap; }
+.tabs a { padding: 8px 12px; color: var(--text-2); border-bottom: 2px solid transparent; font-size: 13.5px; }
+.tabs a.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.js .tabpanel { display: none; }
+.js .tabpanel.active { display: block; }
+.empty { padding: 18px; text-align: center; color: var(--text-3); border: 1px dashed var(--border); border-radius: 8px; font-size: 13px; }
+.empty strong { display: block; color: var(--text-2); margin-bottom: 4px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; font-size: 13px; }
+.kv dt { color: var(--text-3); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+.bar { height: 8px; border-radius: 4px; background: var(--neutral-soft); position: relative; overflow: hidden; }
+.bar > span { position: absolute; top: 0; bottom: 0; }
+.hbar-row { display: grid; grid-template-columns: 170px 1fr 64px; gap: 8px; align-items: center; font-size: 12.5px; padding: 2px 0; }
+.hbar { height: 10px; position: relative; background: transparent; }
+.hbar .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 1px solid var(--border); }
+.hbar .fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.story { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.story:last-child { border-bottom: 0; }
+.story .head { font-weight: 600; font-size: 13.5px; }
+.story .sub { font-size: 12px; color: var(--text-3); margin: 3px 0; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.story p { margin: 4px 0; font-size: 13px; color: var(--text-2); }
+.chart { width: 100%; height: 360px; }
+.chart.short { height: 240px; }
+.chart.tiny { height: 140px; }
+.legend { font-size: 11.5px; color: var(--text-3); display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.legend i { display: inline-block; width: 10px; height: 3px; margin-right: 4px; vertical-align: middle; }
+.zone-list li { margin-bottom: 4px; }
+details { margin: 6px 0; }
+details summary { cursor: pointer; color: var(--text-2); font-size: 13px; }
+.pill-list { display: flex; gap: 6px; flex-wrap: wrap; }
+.calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.calendar .day { padding: 6px; border-radius: 6px; text-align: center; font-size: 12px; border: 1px solid var(--border); background: var(--surface); }
+.calendar .day.has { background: var(--accent-soft); border-color: var(--accent); }
+.calendar .day.partial { background: var(--caution-soft); border-color: var(--caution); }
+.calendar .dow { font-size: 10.5px; text-align: center; color: var(--text-3); text-transform: uppercase; }
+.memo-section { margin-bottom: 14px; }
+.memo-section h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-2); }
+pre.json { background: var(--surface-2); padding: 10px; border-radius: 8px; overflow: auto; font-size: 12px; max-height: 420px; }
+.footer-note { margin-top: 28px; font-size: 12px; color: var(--text-3); border-top: 1px solid var(--border); padding-top: 12px; }
+
+@media (max-width: 1100px) {
+  .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: fixed; left: -260px; width: 240px; z-index: 20; transition: left .2s; box-shadow: 0 0 30px rgba(0,0,0,.2); }
+  .sidebar.open { left: 0; }
+  .menu-btn { display: inline-flex; }
+  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .span2, .span3 { grid-column: auto; }
+  .content { padding: 14px 16px 40px; }
+  .topbar { padding: 10px 16px; }
+  .hbar-row { grid-template-columns: 120px 1fr 56px; }
+}
+
+/* ---------------------------------------------------------------- market update */
+.update-nav { margin-bottom: 14px; }
+.weekstrip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.weekstrip .day { border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; color: var(--text); display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.weekstrip .day:hover { text-decoration: none; background: var(--surface-2); }
+.weekstrip .day.selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.status-banner ul { margin: 4px 0 0 18px; }
+ul.claims { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+li.claim { line-height: 1.45; }
+details.evidence { margin-top: 3px; }
+details.evidence summary { cursor: pointer; color: var(--text-3); }
+table.mini { width: 100%; font-size: 12px; margin-top: 6px; }
+table.mini th, table.mini td { padding: 3px 6px; }
+svg.curve { width: 100%; height: auto; max-height: 240px; }
+form.stack { display: flex; flex-direction: column; gap: 6px; }
+form.stack input, form.stack select, form.stack textarea { width: 100%; }
+@media (max-width: 760px) { .weekstrip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------------------------------------------------------------- info buttons, briefs, charts */
+.info-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid var(--text-3); color: var(--text-2); font: italic 600 10px/1 Georgia, serif; cursor: help; margin-left: 4px; vertical-align: 1px; }
+.info-btn .tip { display: none; position: absolute; z-index: 40; left: 50%; top: 20px; transform: translateX(-50%); width: 300px; max-width: 80vw;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); padding: 10px 12px;
+  font: normal 400 12.5px/1.45 system-ui, sans-serif; text-transform: none; letter-spacing: 0; text-align: left; }
+.info-btn .tip strong { display: block; margin-bottom: 4px; font-size: 13px; }
+.info-btn .tip .tip-row { display: block; margin-bottom: 4px; }
+.info-btn .tip a { font-size: 12px; }
+.info-btn:hover .tip, .info-btn:focus .tip, .info-btn:focus-within .tip { display: block; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.kpi-tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.kpi-tile .label { font-size: 12px; color: var(--text-2); display: flex; align-items: center; }
+.kpi-tile .value { font-size: 21px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.kpi-tile .delta { font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.kpi-tile .src { font-size: 11px; color: var(--text-3); }
+.kpi-tile svg.spark { margin-top: 4px; }
+.brief-head { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; margin-bottom: 12px; }
+.brief-head h2 { margin: 0; font-size: 20px; }
+.brief-head .meta { color: var(--text-3); font-size: 12.5px; }
+.why h3 { margin: 12px 0 6px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.why ul { margin: 0; padding-left: 18px; }
+.why li { margin: 4px 0; line-height: 1.5; }
+.cite { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+.cite a { color: var(--text-3); }
+.factor { display: grid; grid-template-columns: 1.6fr 1fr repeat(3, 0.8fr); gap: 6px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.factor .eff { font-size: 11.5px; font-weight: 600; text-align: center; border-radius: 999px; padding: 2px 6px; }
+.eff.supportive { background: var(--pos-soft); color: var(--pos); }
+.eff.headwind { background: var(--neg-soft); color: var(--neg); }
+.eff.neutral { background: var(--neutral-soft); color: var(--text-3); }
+.newsitem { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.newsitem .t { font-weight: 600; font-size: 13.5px; }
+.newsitem .s { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.newsitem .m { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.chart-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+.chart-card .chart { height: 260px; }
+.chart-card h2 { justify-content: space-between; }
+.range-btns { display: inline-flex; gap: 2px; }
+.range-btns button { font-size: 11px; padding: 2px 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); border-radius: 6px; cursor: pointer; }
+.range-btns button.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.chart-last { font-size: 11.5px; color: var(--text-3); margin-top: 6px; }
+.data-notes-link { font-size: 12px; color: var(--text-3); }
+@media (max-width: 760px) { .chart-grid { grid-template-columns: 1fr; } .factor { grid-template-columns: 1.4fr 1fr repeat(3, 0.9fr); font-size: 12px; } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+<script>try{var t=localStorage.getItem("mbi-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<style>.tabradio{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.tabs-css label{padding:8px 12px;color:var(--text-2);border-bottom:2px solid transparent;font-size:13.5px;cursor:pointer;user-select:none}label.tablink{color:var(--accent);cursor:pointer;text-decoration:underline}.tabpanel{display:none!important}#tab-metrics:checked~#metrics,#tab-sources:checked~#sources,#tab-status:checked~#status{display:block!important}#tab-metrics:checked~.tabs-css label[for="tab-metrics"],#tab-sources:checked~.tabs-css label[for="tab-sources"],#tab-status:checked~.tabs-css label[for="tab-status"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}</style></head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">MI</div>
+      <div><div class="brand-name">Multibagger Intelligence</div><div class="brand-sub">Research and market intelligence</div></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group">Market update</div>
+      <a href="#" data-offline="1" class="">Daily market update</a>
+      <a href="#" data-offline="1" class="">Weekly review</a>
+      <a href="methodology.html" class="active">Methodology and sources</a>
+      <a href="#" data-offline="1" class="">Corrections</a>
+      <div class="nav-group">Daily</div>
+      <a href="#" data-offline="1" class="">Executive overview</a>
+      <a href="#" data-offline="1" class="">India markets</a>
+      <a href="#" data-offline="1" class="">US markets</a>
+      <a href="#" data-offline="1" class="">Crypto</a>
+      <a href="#" data-offline="1" class="">Macro, RBI and credit</a>
+      <a href="#" data-offline="1" class="">News and events</a>
+      <div class="nav-group">Research</div>
+      <a href="#" data-offline="1" class="">Stock opportunities</a>
+      <a href="#" data-offline="1" class="">Multibagger radar</a>
+      <a href="#" data-offline="1" class="">Shortlisting lenses</a>
+      <a href="#" data-offline="1" class="">Market valuation by size</a>
+      <a href="#" data-offline="1" class="">Compare and watchlist</a>
+      <a href="#" data-offline="1" class="">Model portfolio (simulation)</a>
+      <div class="nav-group">Accountability</div>
+      <a href="#" data-offline="1" class="">Historical archive</a>
+      <a href="#" data-offline="1" class="">What the system learned</a>
+      <a href="#" data-offline="1" class="">Model and forecast audit</a>
+      <a href="#" data-offline="1" class="">Data quality and health</a>
+      <a href="#" data-offline="1" class="">Source register</a>
+    </nav>
+    <div class="footer-note">Research and monitoring only. Not investment advice. No orders are placed.</div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" aria-label="Open navigation">&#9776;</button>
+      <h1>Methodology and sources</h1>
+      
+      <span class="small muted">India 2026-11-20 IST &middot; US 2026-11-19 ET</span>
+      
+      <a href="#" data-offline="1"><span class="badge info">Market update 2026-11-20</span></a>
+
+      <button id="theme-toggle" title="Toggle light or dark theme" aria-label="Toggle theme">&#9680;</button>
+    </header>
+    
+    <main class="content">
+      
+      
+<input type="radio" name="mbi-tabs" id="tab-metrics" class="tabradio" aria-label="Metric catalogue" checked><input type="radio" name="mbi-tabs" id="tab-sources" class="tabradio" aria-label="Sources"><input type="radio" name="mbi-tabs" id="tab-status" class="tabradio" aria-label="Report status rules"><div class="tabs tabs-css"><label for="tab-metrics">Metric catalogue</label><label for="tab-sources">Sources</label><label for="tab-status">Report status rules</label></div>
+
+
+<section id="metrics" class="tabpanel">
+  <div class="card"><h2>Canonical metrics (config/metrics_catalog.yaml)</h2>
+  <p class="small">Every published number is computed once, by the function named here in <code>mbi/metrics/calc.py</code> (Decimal arithmetic, rounding only at display). Yields in percent; yield changes in basis points; changes in ratios and rates in percentage points; baselines chosen from dates that actually have observations, with the baseline date shown.</p>
+  <input type="search" data-filter-for="mtab" placeholder="Filter metrics" aria-label="Filter metrics">
+  <div class="table-wrap"><table id="mtab" class="sortable"><thead><tr><th>ID</th><th>Name</th><th>Unit</th><th>Baseline</th><th>Implementation</th><th>Sources</th></tr></thead><tbody>
+  <tr id="idx_close"><td><code>IDX_CLOSE</code></td><td>Index close</td><td class="tiny">index points</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">nse_indices_close (IN); fred (SPX; DJIA; COMP close-only); nasdaq_quote (COMP; NDX OHLC); fred NIKKEI225; yahoo_chart (FTSE; HSI; opt-in)</td></tr><tr id="idx_ohlc"><td><code>IDX_OHLC</code></td><td>Index open, high, low, close</td><td class="tiny">index points</td><td class="tiny">none</td>
+    <td class="tiny"><code>mbi.quality.checks.validate_ohlc (validation only)</code></td><td class="tiny">nse_indices_close; nasdaq_quote</td></tr><tr id="idx_dod_pct"><td><code>IDX_DOD_PCT</code></td><td>Index daily change (percent)</td><td class="tiny">percent</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(close / previous_session_close - 1) * 100</div></td><td class="tiny">as IDX_CLOSE; previous close from the same source</td></tr><tr id="idx_dod_abs"><td><code>IDX_DOD_ABS</code></td><td>Index daily change (points)</td><td class="tiny">index points</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.abs_change</code><div>close - previous_session_close</div></td><td class="tiny">as IDX_CLOSE</td></tr><tr id="idx_wow_pct"><td><code>IDX_WOW_PCT</code></td><td>Index weekly change (percent)</td><td class="tiny">percent</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.pct_change with calc.week_baseline</code><div>(close at report date / close at week baseline - 1) * 100</div></td><td class="tiny">as IDX_CLOSE</td></tr><tr id="stk_dod_pct"><td><code>STK_DOD_PCT</code></td><td>Stock daily return (movers)</td><td class="tiny">percent</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(close / previous close - 1) * 100 with corporate-action adjusted previous close for India</div></td><td class="tiny">nse_bhavcopy (IN); nasdaq_screener (US; opt-in)</td></tr><tr id="movers_rank"><td><code>MOVERS_RANK</code></td><td>Top and bottom movers</td><td class="tiny">rank</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>mbi.market.analytics.india_movers / us_movers</code><div>rank by STK_DOD_PCT descending (top) and ascending (bottom); ties broken by higher traded value, then symbol</div></td><td class="tiny">nse_bhavcopy; nasdaq_screener</td></tr><tr id="flow_net_cash"><td><code>FLOW_NET_CASH</code></td><td>FII/FPI and DII net investment, cash market (provisional)</td><td class="tiny">INR crore</td><td class="tiny">none (daily); weekly sum over Friday to Thursday in the weekly review</td>
+    <td class="tiny"><code>calc.net_flow</code><div>gross purchase - gross sale</div></td><td class="tiny">nse_fiidii (NSE provisional; exchange-compiled)</td></tr><tr id="gsec10_yield"><td><code>GSEC10_YIELD</code></td><td>India 10-year G-Sec yield (CCIL)</td><td class="tiny">percent (semi-annual yield to maturity)</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">ccil (tenor-wise indicative yields; 9Y-10Y GoI bucket); ccil_manual_import</td></tr><tr id="gsec10_dod_bps"><td><code>GSEC10_DOD_BPS</code></td><td>India 10Y daily change (bps)</td><td class="tiny">basis points</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.bps_change</code><div>(yield - previous session yield) * 100</div></td><td class="tiny">ccil</td></tr><tr id="gsec10_wow_bps"><td><code>GSEC10_WOW_BPS</code></td><td>India 10Y weekly change (bps)</td><td class="tiny">basis points</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.bps_change with calc.week_baseline</code><div>(yield at report date - yield at week baseline) * 100</div></td><td class="tiny">ccil</td></tr><tr id="gsec_curve_yield"><td><code>GSEC_CURVE_YIELD</code></td><td>G-Sec curve point (CCIL tenor bucket)</td><td class="tiny">percent</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">ccil</td></tr><tr id="gsec_effective_annual"><td><code>GSEC_EFFECTIVE_ANNUAL</code></td><td>Effective annual yield</td><td class="tiny">percent (annual compounding)</td><td class="tiny">none</td>
+    <td class="tiny"><code>calc.effective_annual_yield</code><div>((1 + y / 100 / m) ^ m - 1) * 100 with m = 2</div></td><td class="tiny">derived from GSEC_CURVE_YIELD</td></tr><tr id="tbill_gsec_spread_bps"><td><code>TBILL_GSEC_SPREAD_BPS</code></td><td>Spread of G-Sec tenor over the 364-day T-bill</td><td class="tiny">basis points</td><td class="tiny">none; shown for report date, 1 week, 1 month, 3 months</td>
+    <td class="tiny"><code>calc.spread_bps</code><div>(G-Sec tenor yield - 364-day T-bill yield) * 100</div></td><td class="tiny">ccil (both legs must come from the same CCIL page and date)</td></tr><tr id="auction_cutoff_yield"><td><code>AUCTION_CUTOFF_YIELD</code></td><td>Auction cut-off yield</td><td class="tiny">percent</td><td class="tiny">previous auction of the same security or tenor</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (G-Sec full auction results; T-bill auction results)</td></tr><tr id="auction_bid_cover"><td><code>AUCTION_BID_COVER</code></td><td>Bid-to-cover ratio (standard)</td><td class="tiny">ratio</td><td class="tiny">none</td>
+    <td class="tiny"><code>calc.bid_cover_ratio</code><div>competitive bids received / notified amount</div></td><td class="tiny">rbi_releases</td></tr><tr id="global10y_yield"><td><code>GLOBAL10Y_YIELD</code></td><td>Global 10-year government yields</td><td class="tiny">percent</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">us_treasury (par yield curve 10Y); boe_yields (fitted nominal par yield 10Y); bundesbank_yields (Svensson fitted 10Y); mof_jgb (MoF JGB 10Y)</td></tr><tr id="global10y_wow_bps"><td><code>GLOBAL10Y_WOW_BPS</code></td><td>Global 10Y weekly change (bps)</td><td class="tiny">basis points</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.bps_change with calc.week_baseline</code><div>(yield at report date - yield at week baseline) * 100</div></td><td class="tiny">as GLOBAL10Y_YIELD</td></tr><tr id="mm_rate"><td><code>MM_RATE</code></td><td>Call money and TREPS weighted average rates</td><td class="tiny">percent</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (Money Market Operations)</td></tr><tr id="liq_net_injection"><td><code>LIQ_NET_INJECTION</code></td><td>Net liquidity injected (+) / absorbed (-)</td><td class="tiny">INR crore</td><td class="tiny">none; weekly average over Monday to Thursday (legacy) and Friday to Thursday</td>
+    <td class="tiny"><code>calc.net_liquidity (reconciliation of the RBI total)</code><div>repo + variable repo + MSF + SLF + OMO purchase - reverse repo - variable reverse repo - SDF - OMO sale</div></td><td class="tiny">rbi_releases (Money Market Operations total including outstanding operations; WSS table 8 daily)</td></tr><tr id="net_durable_liq"><td><code>NET_DURABLE_LIQ</code></td><td>Net durable liquidity</td><td class="tiny">INR crore</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (Money Market Operations item I)</td></tr><tr id="usdinr_ref"><td><code>USDINR_REF</code></td><td>USD/INR reference rate</td><td class="tiny">INR per USD</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fbil (FBIL reference rate; primary); ecb_fx (ECB reference cross; cross-check)</td></tr><tr id="fx_pct_change"><td><code>FX_PCT_CHANGE</code></td><td>FX change (percent)</td><td class="tiny">percent</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>calc.pct_change with calc.fx_direction_label</code><div>(rate / baseline rate - 1) * 100; for USD/INR a positive change means rupee depreciation</div></td><td class="tiny">fbil; ecb_fx (EUR/USD; GBP/USD and USD/JPY reference crosses)</td></tr><tr id="usd_broad_index"><td><code>USD_BROAD_INDEX</code></td><td>Nominal broad US dollar index (Federal Reserve)</td><td class="tiny">index (Jan 2006 = 100)</td><td class="tiny">week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fred DTWEXBGS</td></tr><tr id="fxres_level"><td><code>FXRES_LEVEL</code></td><td>RBI foreign exchange reserves (total and components)</td><td class="tiny">USD million</td><td class="tiny">week; month; year</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (WSS extract table 2)</td></tr><tr id="fxres_pct_change"><td><code>FXRES_PCT_CHANGE</code></td><td>Reserves change (percent)</td><td class="tiny">percent</td><td class="tiny">week; month; year</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(level / baseline level - 1) * 100</div></td><td class="tiny">rbi_releases</td></tr><tr id="crude_spot"><td><code>CRUDE_SPOT</code></td><td>Brent and WTI spot price</td><td class="tiny">USD per barrel</td><td class="tiny">week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fred DCOILBRENTEU; fred DCOILWTICO (US EIA)</td></tr><tr id="us_initial_claims"><td><code>US_INITIAL_CLAIMS</code></td><td>US initial jobless claims</td><td class="tiny">persons (shown in thousands)</td><td class="tiny">previous release week</td>
+    <td class="tiny"><code>calc.abs_change for the weekly change</code></td><td class="tiny">fred ICSA (US Department of Labor)</td></tr><tr id="scb_business"><td><code>SCB_BUSINESS</code></td><td>Scheduled commercial banks - deposits, bank credit, food and non-food credit</td><td class="tiny">INR crore</td><td class="tiny">fortnight; financial year so far; year (as published)</td>
+    <td class="tiny"><code>calc.pct_change for level changes</code></td><td class="tiny">rbi_releases (WSS extract table 4)</td></tr><tr id="scb_ratio_pp"><td><code>SCB_RATIO_PP</code></td><td>Credit to deposit ratio and its change</td><td class="tiny">percent (ratio) and percentage points (change)</td><td class="tiny">fortnight; year</td>
+    <td class="tiny"><code>calc.ratio_pct and calc.pp_change</code><div>bank credit / aggregate deposits * 100; change = ratio - baseline ratio (percentage points)</div></td><td class="tiny">derived from SCB_BUSINESS</td></tr>
+  </tbody></table></div></div>
+</section>
+
+
+<section id="sources" class="tabpanel">
+  <div class="card"><h2>Sources on the public pages</h2>
+  <ul class="small">
+    <li>Charts and data files use only series whose publishers allow redistribution: US Treasury, Bank of England, Deutsche Bundesbank, Japan Ministry of Finance, ECB reference rates, EIA crude spot prices (via FRED) and RBI money market, liquidity and reserves releases.</li>
+    <li>Index levels, exchange statistics and benchmark rates (NSE, BSE, CCIL, FBIL and index providers) are not reproduced as tables, charts or files. The written analysis quotes single closing values, with the source named in brackets after each sentence.</li>
+    <li>News summaries are our own one or two sentences, each linking to the publisher's article.</li>
+  </ul></div>
+</section>
+
+
+<section id="status" class="tabpanel">
+  <div class="card"><h2>Report status</h2>
+  <ul class="small">
+    <li><strong>Verified</strong>: every critical gate passed (India index close and OHLC, change versus provider, US index close, CCIL 10-year, USD/INR reference for the session, narrative audit, independent recompute, text lint).</li>
+    <li><strong>Partial</strong>: useful content exists but at least one critical gate failed; the failures are listed at the top of the report.</li>
+    <li><strong>Failed</strong>: neither the India index close nor the CCIL yield is available, so a summary would mislead and is withheld.</li>
+    <li><strong>Stale</strong>: an observation older than the session it is reported for; always labelled with its own date.</li>
+    <li><strong>Not applicable</strong>: market closed (holiday shown) or the provider does not publish the field.</li>
+  </ul>
+  <p class="small">Narrative audit per sentence: evidence present, numbers match the stored values, causal wording only in hedged interpretations, no overstated certainty, direction words match the computed sign, news published after a close is never used to explain that session, older observations labelled with their date, no en or em dashes. Failing sentences are withheld and listed in Data quality.</p></div>
+</section>
+
+
+
+      <div class="footer-note">LIMITED-DATA MODE: end-of-day public sources; not real time. Page rendered 20 Nov 2026 22:43 IST. Model outputs are estimates, not guarantees.</div>
+    </main>
+  </div>
+</div>
+
+<script>window.MBI_DATA = {};</script><script>/* Dashboard behaviour: sortable/filterable tables, tabs, charts, persisted preferences. */
+(function () {
+  "use strict";
+
+  function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
+  // with scripts running, tab panels are hidden until chosen; without them (blocked scripts) every section stays visible
+  document.documentElement.classList.add("js");
+
+  // ---------------------------------------------------------------- sidebar
+  var btn = document.querySelector(".menu-btn");
+  if (btn) btn.addEventListener("click", function () { document.querySelector(".sidebar").classList.toggle("open"); });
+
+  // ---------------------------------------------------------------- theme toggle
+  var saved = store("mbi-theme");
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+  var tbtn = document.getElementById("theme-toggle");
+  if (tbtn) tbtn.addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme");
+    var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    store("mbi-theme", next);
+    location.reload();
+  });
+
+  // ---------------------------------------------------------------- sortable tables
+  function cellValue(td) {
+    var v = td.getAttribute("data-v");
+    if (v === null) v = td.textContent.trim();
+    var cleaned = String(v).replace(/[,%+\s▲▼]/g, "");
+    var n = Number(cleaned);
+    return cleaned !== "" && !isNaN(n) ? n : String(v).toLowerCase();
+  }
+  document.querySelectorAll("table.sortable").forEach(function (table) {
+    table.querySelectorAll("th").forEach(function (th, idx) {
+      if (th.classList.contains("nosort")) return;
+      th.classList.add("sortable");
+      th.addEventListener("click", function () {
+        var tbody = table.tBodies[0];
+        var rows = Array.prototype.slice.call(tbody.rows);
+        var asc = !th.classList.contains("sort-asc");
+        table.querySelectorAll("th").forEach(function (h) { h.classList.remove("sort-asc", "sort-desc"); });
+        th.classList.add(asc ? "sort-asc" : "sort-desc");
+        rows.sort(function (a, b) {
+          var x = cellValue(a.cells[idx]), y = cellValue(b.cells[idx]);
+          if (x === "" || x === "n/a") return 1;
+          if (y === "" || y === "n/a") return -1;
+          if (x < y) return asc ? -1 : 1;
+          if (x > y) return asc ? 1 : -1;
+          return 0;
+        });
+        rows.forEach(function (r) { tbody.appendChild(r); });
+      });
+    });
+  });
+
+  // ---------------------------------------------------------------- table filters
+  document.querySelectorAll("[data-filter-for]").forEach(function (input) {
+    var table = document.getElementById(input.getAttribute("data-filter-for"));
+    if (!table) return;
+    var apply = function () {
+      var text = (document.querySelector("[data-filter-for='" + table.id + "'][type=search]") || {}).value || "";
+      text = text.toLowerCase();
+      var selects = document.querySelectorAll("select[data-filter-for='" + table.id + "']");
+      Array.prototype.forEach.call(table.tBodies[0].rows, function (row) {
+        var ok = !text || row.textContent.toLowerCase().indexOf(text) >= 0;
+        selects.forEach(function (sel) {
+          var col = sel.getAttribute("data-col");
+          if (sel.value && ok) ok = (row.getAttribute("data-" + col) || "").split(" ").indexOf(sel.value) >= 0;
+        });
+        row.style.display = ok ? "" : "none";
+      });
+    };
+    input.addEventListener("input", apply);
+    input.addEventListener("change", apply);
+  });
+
+  // ---------------------------------------------------------------- tabs (hash-addressable, remembered per page)
+  document.querySelectorAll(".tabs").forEach(function (tabs) {
+    if (tabs.classList.contains("tabs-css")) return;   // exported pages: radio-button tabs driven by CSS alone
+    var key = "mbi-tab-" + location.pathname;
+    function show(id) {
+      tabs.querySelectorAll("a").forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + id); });
+      document.querySelectorAll(".tabpanel").forEach(function (p) { p.classList.toggle("active", p.id === id); });
+      store(key, id);
+      window.dispatchEvent(new Event("resize"));
+    }
+    tabs.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        show(a.getAttribute("href").slice(1));
+        try { history.replaceState(null, "", a.getAttribute("href")); } catch (err) { /* sandboxed viewers refuse history changes */ }
+      });
+    });
+    var initial = (location.hash || "").slice(1) || store(key);
+    var first = tabs.querySelector("a");
+    if (!initial || !document.getElementById(initial)) initial = first ? first.getAttribute("href").slice(1) : null;
+    if (initial) show(initial);
+  });
+
+  // ---------------------------------------------------------------- date picker persistence
+  var datePick = document.getElementById("as-of-date");
+  if (datePick) datePick.addEventListener("change", function () { store("mbi-date", datePick.value); });
+
+  // ---------------------------------------------------------------- charts
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function baseChart(el, height) {
+    return LightweightCharts.createChart(el, {
+      height: height || el.clientHeight || 360,
+      layout: { background: { type: "solid", color: "transparent" }, textColor: css("--text-2"), fontSize: 11 },
+      grid: { vertLines: { color: css("--border") }, horzLines: { color: css("--border") } },
+      rightPriceScale: { borderColor: css("--border") },
+      timeScale: { borderColor: css("--border") },
+      crosshair: { mode: 0 },
+      autoSize: true,
+    });
+  }
+  function seq(dates, values) {
+    var out = [];
+    for (var i = 0; i < dates.length; i++) if (values[i] !== null && values[i] !== undefined) out.push({ time: dates[i], value: values[i] });
+    return out;
+  }
+
+  window.MBI = {
+    candles: function (el, data, opts) {
+      opts = opts || {};
+      if (!window.LightweightCharts || !data || data.status !== "ok") { el.innerHTML = '<div class="empty"><strong>Chart unavailable</strong>' + (data && data.status ? "No verified price history." : "") + "</div>"; return; }
+      var chart = baseChart(el);
+      var s = chart.addCandlestickSeries({ upColor: css("--pos"), downColor: css("--neg"), borderVisible: false, wickUpColor: css("--pos"), wickDownColor: css("--neg") });
+      s.setData(data.dates.map(function (d, i) { var o = data.ohlc[i]; return { time: d, open: o[0], high: o[1], low: o[2], close: o[3] }; }));
+      var colors = { sma20: "#c084fc", sma50: "#f59e0b", sma200: "#2563eb" };
+      ["sma20", "sma50", "sma200"].forEach(function (k) { if (data[k]) chart.addLineSeries({ color: colors[k], lineWidth: 1, priceLineVisible: false, lastValueVisible: false }).setData(seq(data.dates, data[k])); });
+      if (data.bb_upper && opts.bands !== false) {
+        [data.bb_upper, data.bb_lower].forEach(function (arr) { chart.addLineSeries({ color: css("--text-3"), lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false }).setData(seq(data.dates, arr)); });
+      }
+      var vol = chart.addHistogramSeries({ priceScaleId: "vol", priceFormat: { type: "volume" }, color: css("--border") });
+      chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+      vol.setData(seq(data.dates, data.volume).map(function (p) { return { time: p.time, value: p.value, color: css("--text-3") + "55" }; }));
+      (opts.zones || []).forEach(function (z) {
+        var col = z.kind === "support" ? css("--pos") : css("--neg");
+        s.createPriceLine({ price: z.high, color: col, lineWidth: 1, lineStyle: 1, axisLabelVisible: false, title: z.kind + " zone" });
+        s.createPriceLine({ price: z.low, color: col, lineWidth: 1, lineStyle: 1, axisLabelVisible: false, title: "" });
+      });
+      (opts.levels || []).forEach(function (lv) { if (lv.price) s.createPriceLine({ price: lv.price, color: lv.color || css("--accent"), lineWidth: 2, lineStyle: 2, axisLabelVisible: true, title: lv.title }); });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+    line: function (el, series, opts) {
+      opts = opts || {};
+      if (!window.LightweightCharts || !series || !series.length || !series.some(function (s) { return s.data && s.data.length; })) { el.innerHTML = '<div class="empty"><strong>No data</strong>' + (opts.empty || "No verified observations stored for this series.") + "</div>"; return; }
+      var chart = baseChart(el);
+      var palette = [css("--accent"), "#f59e0b", css("--pos"), css("--unverified"), css("--neg")];
+      series.forEach(function (s, i) {
+        var ls = chart.addLineSeries({ color: s.color || palette[i % palette.length], lineWidth: 2, lineStyle: s.dashed ? 2 : 0, title: s.name || "", priceLineVisible: false });
+        ls.setData(s.data);
+      });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+    rsi: function (el, data) {
+      if (!window.LightweightCharts || !data || data.status !== "ok") return;
+      var chart = baseChart(el);
+      var s = chart.addLineSeries({ color: css("--unverified"), lineWidth: 1, priceLineVisible: false });
+      s.setData(seq(data.dates, data.rsi));
+      [30, 70].forEach(function (v) { s.createPriceLine({ price: v, color: css("--text-3"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "" }); });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+  };
+})();
+
+/* Generic data-driven charts: <div class="chart" data-chart='[{"kind":"series","id":"US_TSY_10Y","name":"US 10Y"}]'></div>
+   kinds: series (macro_observations), index (index_bars close), spread (a minus b in bps), portfolio (model portfolio NAV,
+   rebased indices and estimate paths in INR). Range buttons: .range-btns button[data-range]. */
+(function () {
+  var cache = {};
+  function url(spec) {
+    if (spec.kind === "index") return "/api/index/" + encodeURIComponent(spec.id);
+    if (spec.kind === "spread") return "/api/spread?a=" + encodeURIComponent(spec.a) + "&b=" + encodeURIComponent(spec.b);
+    if (spec.kind === "portfolio") return "/api/portfolio/series/" + encodeURIComponent(spec.id);
+    return "/api/series/" + encodeURIComponent(spec.id);
+  }
+  function get(spec) {
+    var u = url(spec);
+    if (window.MBI_DATA) { var d = window.MBI_DATA[u]; return Promise.resolve(d ? (d.data || []) : []); }
+    if (window.MBI_DATA_MAP) { if (!window.MBI_DATA_MAP[u]) return Promise.resolve([]); u = window.MBI_DATA_MAP[u]; }
+    if (!cache[u]) cache[u] = fetch(u).then(function (r) { return r.json(); }).then(function (j) { return j.data || []; }).catch(function () { return []; });
+    return cache[u];
+  }
+  function cutoff(range) {
+    if (!range || range === "all") return null;
+    var d = new Date(); var m = { "1m": 1, "3m": 3, "6m": 6, "1y": 12, "2y": 24 }[range] || 12;
+    d.setMonth(d.getMonth() - m); return d.toISOString().slice(0, 10);
+  }
+  function draw(el, range) {
+    var specs; try { specs = JSON.parse(el.getAttribute("data-chart")); } catch (e) { return; }
+    Promise.all(specs.map(get)).then(function (all) {
+      var c = cutoff(range);
+      var series = specs.map(function (s, i) {
+        var data = all[i].filter(function (p) { return p.value !== null && (!c || p.time >= c); });
+        if (s.rebase && data.length) { var b = data[0].value; data = data.map(function (p) { return { time: p.time, value: +(p.value / b * 100).toFixed(3) }; }); }
+        return { name: s.name || s.id || (s.a + " - " + s.b), data: data, dashed: !!s.dashed, color: s.color };
+      });
+      el.innerHTML = "";
+      if (window.MBI) window.MBI.line(el, series, { empty: el.getAttribute("data-empty") || "History builds up with each daily refresh." });
+      var last = el.parentNode.querySelector(".chart-last");
+      if (last) {
+        last.textContent = series.filter(function (s) { return s.data.length; }).map(function (s) {
+          var p = s.data[s.data.length - 1]; return s.name + ": " + p.value + " (" + p.time + ")";
+        }).join("  |  ");
+      }
+    });
+  }
+  function init() {
+    document.querySelectorAll("[data-chart]").forEach(function (el) {
+      var card = el.closest(".card") || el.parentNode;
+      var range = el.getAttribute("data-range") || "1y";
+      var btns = card.querySelectorAll(".range-btns button");
+      btns.forEach(function (b) {
+        if (b.getAttribute("data-range") === range) b.classList.add("active");
+        b.addEventListener("click", function () {
+          btns.forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+          draw(el, b.getAttribute("data-range"));
+        });
+      });
+      // draw when visible (tab panels hidden at load have zero width)
+      if (el.offsetParent !== null) draw(el, range);
+      else el.setAttribute("data-pending", range);
+    });
+    function drawPending() {
+      setTimeout(function () {
+        document.querySelectorAll("[data-pending]").forEach(function (el) {
+          if (el.offsetParent !== null) { var r = el.getAttribute("data-pending"); el.removeAttribute("data-pending"); draw(el, r); }
+        });
+      }, 30);
+    }
+    document.querySelectorAll(".tabs a").forEach(function (a) { a.addEventListener("click", drawPending); });
+    document.querySelectorAll("input.tabradio").forEach(function (r) { r.addEventListener("change", drawPending); });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+
+<div class="footer-note" style="padding:12px 24px">Static copy exported from the local dashboard; interactive search, corrections and research requests work only in the local app. Public edition: charts and data files include only series whose publishers allow redistribution.</div></body>
+</html>
