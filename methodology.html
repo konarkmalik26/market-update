@@ -1,0 +1,1124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology and sources | Multibagger Intelligence</title>
+<style>/* Multibagger Intelligence dashboard: calm, information-dense financial research design. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f1f3f6;
+  --border: #e2e5ea;
+  --text: #16191f;
+  --text-2: #4b5260;
+  --text-3: #7a8191;
+  --accent: #1f4fd1;
+  --accent-soft: #e8eefc;
+  --pos: #0f7a3d;
+  --pos-soft: #e5f4ea;
+  --neg: #b42318;
+  --neg-soft: #fbe9e7;
+  --caution: #a15c07;
+  --caution-soft: #fdf1df;
+  --unverified: #6a3fc1;
+  --unverified-soft: #efe9fb;
+  --neutral-soft: #eef0f3;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --radius: 10px;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --surface: #161a20; --surface-2: #1c2128; --border: #2a3039; --text: #e7eaee; --text-2: #b4bac4;
+    --text-3: #8a919d; --accent: #7aa2ff; --accent-soft: #1d2840; --pos: #4cc285; --pos-soft: #12301f; --neg: #ff7b70;
+    --neg-soft: #3a1714; --caution: #f0b35a; --caution-soft: #3a2a10; --unverified: #b598f5; --unverified-soft: #2a2040;
+    --neutral-soft: #22272f; --shadow: none; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0f1216; --surface: #161a20; --surface-2: #1c2128; --border: #2a3039; --text: #e7eaee; --text-2: #b4bac4;
+  --text-3: #8a919d; --accent: #7aa2ff; --accent-soft: #1d2840; --pos: #4cc285; --pos-soft: #12301f; --neg: #ff7b70;
+  --neg-soft: #3a1714; --caution: #f0b35a; --caution-soft: #3a2a10; --unverified: #b598f5; --unverified-soft: #2a2040;
+  --neutral-soft: #22272f; --shadow: none;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font: 14px/1.5 var(--sans); -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.num, td.num, th.num { font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.mono { font-family: var(--mono); font-size: 12.5px; }
+.muted { color: var(--text-3); }
+.small { font-size: 12.5px; }
+.tiny { font-size: 11.5px; }
+
+/* ---------------------------------------------------------------- layout */
+.app { display: grid; grid-template-columns: 228px minmax(0, 1fr); min-height: 100vh; }
+.sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 16px 12px; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+.brand { display: flex; gap: 10px; align-items: center; padding: 4px 8px 16px; }
+.brand-mark { width: 28px; height: 28px; border-radius: 7px; background: linear-gradient(135deg, var(--accent), #12a37a); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 13px; }
+.brand-name { font-weight: 650; font-size: 13.5px; line-height: 1.2; }
+.brand-sub { font-size: 11px; color: var(--text-3); }
+.nav-group { margin: 14px 0 4px; padding: 0 8px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+.nav a { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 7px; color: var(--text-2); font-size: 13.5px; }
+.nav a:hover { background: var(--surface-2); text-decoration: none; color: var(--text); }
+.nav a.active { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.main { min-width: 0; }
+html { scroll-padding-top: 72px; }
+.topbar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); padding: 10px 24px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.topbar h1 { font-size: 17px; margin: 0; font-weight: 650; flex: 1 1 auto; }
+.topbar form { display: flex; gap: 6px; align-items: center; }
+.content { padding: 20px 24px 48px; max-width: 1480px; }
+.menu-btn { display: none; }
+
+.grid { display: grid; gap: 16px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.span2 { grid-column: span 2; }
+.span3 { grid-column: span 3; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 14px 16px; min-width: 0; }
+.card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-2); margin: 0 0 10px; font-weight: 650; display: flex; align-items: center; gap: 8px; }
+.card h3 { font-size: 14px; margin: 14px 0 6px; }
+.card .meta { font-size: 11.5px; color: var(--text-3); margin-top: 8px; }
+.section-title { font-size: 15px; font-weight: 650; margin: 26px 0 10px; }
+.kpi { display: flex; flex-direction: column; gap: 2px; }
+.kpi .label { font-size: 12px; color: var(--text-2); }
+.kpi .value { font-size: 22px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.kpi .delta { font-size: 13px; font-variant-numeric: tabular-nums; }
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.flat { color: var(--text-2); }
+
+/* ---------------------------------------------------------------- badges and alerts */
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 999px; background: var(--neutral-soft); color: var(--text-2); white-space: nowrap; letter-spacing: .02em; }
+.badge.ok { background: var(--pos-soft); color: var(--pos); }
+.badge.warn { background: var(--caution-soft); color: var(--caution); }
+.badge.bad { background: var(--neg-soft); color: var(--neg); }
+.badge.unv { background: var(--unverified-soft); color: var(--unverified); }
+.badge.info { background: var(--accent-soft); color: var(--accent); }
+.alert { border-radius: 8px; padding: 10px 12px; font-size: 13px; border: 1px solid var(--border); background: var(--surface-2); margin-bottom: 10px; }
+.alert.warn { background: var(--caution-soft); border-color: color-mix(in srgb, var(--caution) 30%, transparent); }
+.alert.bad { background: var(--neg-soft); border-color: color-mix(in srgb, var(--neg) 30%, transparent); }
+.alert.info { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 25%, transparent); }
+.alert.synthetic { background: repeating-linear-gradient(45deg, var(--caution-soft), var(--caution-soft) 10px, var(--surface) 10px, var(--surface) 20px); border: 2px dashed var(--caution); font-weight: 700; color: var(--caution); text-align: center; letter-spacing: .08em; }
+.alert ul { margin: 6px 0 0 18px; padding: 0; }
+.banner-history { background: var(--unverified-soft); color: var(--unverified); padding: 8px 24px; font-size: 13px; border-bottom: 1px solid var(--border); }
+
+/* ---------------------------------------------------------------- tables */
+.table-wrap { overflow-x: auto; margin: 0 -4px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { padding: 6px 8px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+th { font-size: 11.5px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .04em; background: var(--surface); position: sticky; top: 0; }
+th.sortable { cursor: pointer; user-select: none; }
+th.sortable::after { content: " \2195"; color: var(--text-3); font-size: 10px; }
+th.sort-asc::after { content: " \2191"; color: var(--accent); }
+th.sort-desc::after { content: " \2193"; color: var(--accent); }
+tbody tr:hover { background: var(--surface-2); }
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+input[type=text], input[type=date], input[type=search], select, textarea { font: inherit; font-size: 13px; padding: 6px 9px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--text); }
+textarea { width: 100%; min-height: 80px; }
+button, .btn { font: inherit; font-size: 13px; padding: 6px 12px; border-radius: 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+button.primary, .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+button:hover, .btn:hover { filter: brightness(0.97); text-decoration: none; }
+
+/* ---------------------------------------------------------------- misc components */
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 14px; flex-wrap: wrap; }
+.tabs a { padding: 8px 12px; color: var(--text-2); border-bottom: 2px solid transparent; font-size: 13.5px; }
+.tabs a.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+.js .tabpanel { display: none; }
+.js .tabpanel.active { display: block; }
+.empty { padding: 18px; text-align: center; color: var(--text-3); border: 1px dashed var(--border); border-radius: 8px; font-size: 13px; }
+.empty strong { display: block; color: var(--text-2); margin-bottom: 4px; }
+.kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; font-size: 13px; }
+.kv dt { color: var(--text-3); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+.bar { height: 8px; border-radius: 4px; background: var(--neutral-soft); position: relative; overflow: hidden; }
+.bar > span { position: absolute; top: 0; bottom: 0; }
+.hbar-row { display: grid; grid-template-columns: 170px 1fr 64px; gap: 8px; align-items: center; font-size: 12.5px; padding: 2px 0; }
+.hbar { height: 10px; position: relative; background: transparent; }
+.hbar .mid { position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 1px solid var(--border); }
+.hbar .fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.story { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.story:last-child { border-bottom: 0; }
+.story .head { font-weight: 600; font-size: 13.5px; }
+.story .sub { font-size: 12px; color: var(--text-3); margin: 3px 0; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+.story p { margin: 4px 0; font-size: 13px; color: var(--text-2); }
+.chart { width: 100%; height: 360px; }
+.chart.short { height: 240px; }
+.chart.tiny { height: 140px; }
+.legend { font-size: 11.5px; color: var(--text-3); display: flex; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+.legend i { display: inline-block; width: 10px; height: 3px; margin-right: 4px; vertical-align: middle; }
+.zone-list li { margin-bottom: 4px; }
+details { margin: 6px 0; }
+details summary { cursor: pointer; color: var(--text-2); font-size: 13px; }
+.pill-list { display: flex; gap: 6px; flex-wrap: wrap; }
+.calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+.calendar .day { padding: 6px; border-radius: 6px; text-align: center; font-size: 12px; border: 1px solid var(--border); background: var(--surface); }
+.calendar .day.has { background: var(--accent-soft); border-color: var(--accent); }
+.calendar .day.partial { background: var(--caution-soft); border-color: var(--caution); }
+.calendar .dow { font-size: 10.5px; text-align: center; color: var(--text-3); text-transform: uppercase; }
+.memo-section { margin-bottom: 14px; }
+.memo-section h4 { margin: 0 0 4px; font-size: 13px; color: var(--text-2); }
+pre.json { background: var(--surface-2); padding: 10px; border-radius: 8px; overflow: auto; font-size: 12px; max-height: 420px; }
+.footer-note { margin-top: 28px; font-size: 12px; color: var(--text-3); border-top: 1px solid var(--border); padding-top: 12px; }
+
+@media (max-width: 1100px) {
+  .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .g3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 820px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: fixed; left: -260px; width: 240px; z-index: 20; transition: left .2s; box-shadow: 0 0 30px rgba(0,0,0,.2); }
+  .sidebar.open { left: 0; }
+  .menu-btn { display: inline-flex; }
+  .g2, .g3, .g4 { grid-template-columns: 1fr; }
+  .span2, .span3 { grid-column: auto; }
+  .content { padding: 14px 16px 40px; }
+  .topbar { padding: 10px 16px; }
+  .hbar-row { grid-template-columns: 120px 1fr 56px; }
+}
+
+/* ---------------------------------------------------------------- market update */
+.update-nav { margin-bottom: 14px; }
+.weekstrip { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+.weekstrip .day { border: 1px solid var(--border); border-radius: 8px; padding: 6px 8px; color: var(--text); display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.weekstrip .day:hover { text-decoration: none; background: var(--surface-2); }
+.weekstrip .day.selected { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); }
+.status-banner ul { margin: 4px 0 0 18px; }
+ul.claims { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+li.claim { line-height: 1.45; }
+details.evidence { margin-top: 3px; }
+details.evidence summary { cursor: pointer; color: var(--text-3); }
+table.mini { width: 100%; font-size: 12px; margin-top: 6px; }
+table.mini th, table.mini td { padding: 3px 6px; }
+svg.curve { width: 100%; height: auto; max-height: 240px; }
+form.stack { display: flex; flex-direction: column; gap: 6px; }
+form.stack input, form.stack select, form.stack textarea { width: 100%; }
+@media (max-width: 760px) { .weekstrip { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---------------------------------------------------------------- info buttons, briefs, charts */
+.info-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 15px; height: 15px; border-radius: 50%;
+  border: 1px solid var(--text-3); color: var(--text-2); font: italic 600 10px/1 Georgia, serif; cursor: help; margin-left: 4px; vertical-align: 1px; }
+.info-btn .tip { display: none; position: absolute; z-index: 40; left: 50%; top: 20px; transform: translateX(-50%); width: 300px; max-width: 80vw;
+  background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 8px; box-shadow: var(--shadow); padding: 10px 12px;
+  font: normal 400 12.5px/1.45 system-ui, sans-serif; text-transform: none; letter-spacing: 0; text-align: left; }
+.info-btn .tip strong { display: block; margin-bottom: 4px; font-size: 13px; }
+.info-btn .tip .tip-row { display: block; margin-bottom: 4px; }
+.info-btn .tip a { font-size: 12px; }
+.info-btn:hover .tip, .info-btn:focus .tip, .info-btn:focus-within .tip { display: block; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.kpi-tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.kpi-tile .label { font-size: 12px; color: var(--text-2); display: flex; align-items: center; }
+.kpi-tile .value { font-size: 21px; font-weight: 650; font-variant-numeric: tabular-nums; }
+.kpi-tile .delta { font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.kpi-tile .src { font-size: 11px; color: var(--text-3); }
+.kpi-tile svg.spark { margin-top: 4px; }
+.brief-head { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: baseline; margin-bottom: 12px; }
+.brief-head h2 { margin: 0; font-size: 20px; }
+.brief-head .meta { color: var(--text-3); font-size: 12.5px; }
+.why h3 { margin: 12px 0 6px; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+.why ul { margin: 0; padding-left: 18px; }
+.why li { margin: 4px 0; line-height: 1.5; }
+.cite { font-size: 11px; color: var(--text-3); white-space: nowrap; }
+.cite a { color: var(--text-3); }
+.factor { display: grid; grid-template-columns: 1.6fr 1fr repeat(3, 0.8fr); gap: 6px; align-items: center; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.factor .eff { font-size: 11.5px; font-weight: 600; text-align: center; border-radius: 999px; padding: 2px 6px; }
+.eff.supportive { background: var(--pos-soft); color: var(--pos); }
+.eff.headwind { background: var(--neg-soft); color: var(--neg); }
+.eff.neutral { background: var(--neutral-soft); color: var(--text-3); }
+.newsitem { padding: 8px 0; border-bottom: 1px solid var(--border); }
+.newsitem .t { font-weight: 600; font-size: 13.5px; }
+.newsitem .s { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+.newsitem .m { font-size: 11.5px; color: var(--text-3); margin-top: 2px; }
+.chart-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 16px; }
+.chart-card .chart { height: 260px; }
+.chart-card h2 { justify-content: space-between; }
+.range-btns { display: inline-flex; gap: 2px; }
+.range-btns button { font-size: 11px; padding: 2px 7px; border: 1px solid var(--border); background: var(--surface); color: var(--text-2); border-radius: 6px; cursor: pointer; }
+.range-btns button.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+.chart-last { font-size: 11.5px; color: var(--text-3); margin-top: 6px; }
+.data-notes-link { font-size: 12px; color: var(--text-3); }
+@media (max-width: 760px) { .chart-grid { grid-template-columns: 1fr; } .factor { grid-template-columns: 1.4fr 1fr repeat(3, 0.9fr); font-size: 12px; } .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+<script>try{var t=localStorage.getItem("mbi-theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
+<style>a[data-offline]{color:var(--text-3);text-decoration:none;cursor:default}</style><style>.tabradio{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}.tabs-css label{padding:8px 12px;color:var(--text-2);border-bottom:2px solid transparent;font-size:13.5px;cursor:pointer;user-select:none}label.tablink{color:var(--accent);cursor:pointer;text-decoration:underline}.tabpanel{display:none!important}#tab-metrics:checked~#metrics,#tab-sources:checked~#sources,#tab-status:checked~#status,#tab-glossary:checked~#glossary{display:block!important}#tab-metrics:checked~.tabs-css label[for="tab-metrics"],#tab-sources:checked~.tabs-css label[for="tab-sources"],#tab-status:checked~.tabs-css label[for="tab-status"],#tab-glossary:checked~.tabs-css label[for="tab-glossary"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}</style></head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">MI</div>
+      <div><div class="brand-name">Multibagger Intelligence</div><div class="brand-sub">Research and market intelligence</div></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-group">Market update</div>
+      <a href="public_2026-11-26.html" class="">Daily market update</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Weekly review</a>
+      <a href="methodology.html" class="active">Methodology and sources</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Corrections</a>
+      <div class="nav-group">Daily</div>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Executive overview</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">India markets</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">US markets</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Crypto</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Macro, RBI and credit</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">News and events</a>
+      <div class="nav-group">Research</div>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Stock opportunities</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Multibagger radar</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Shortlisting lenses</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Market valuation by size</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Compare and watchlist</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Model portfolio (simulation)</a>
+      <div class="nav-group">Accountability</div>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Historical archive</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">What the system learned</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Model and forecast audit</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Data quality and health</a>
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app" class="">Source register</a>
+    </nav>
+    <div class="footer-note">Research and monitoring only. Not investment advice. No orders are placed.</div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" aria-label="Open navigation">&#9776;</button>
+      <h1>Methodology and sources</h1>
+      
+      <span class="small muted">India 2026-11-26 IST &middot; US 2026-11-25 ET</span>
+      
+      <a data-offline="1" aria-disabled="true" title="Opens only in the local dashboard app"><span class="badge info">Market update 2026-11-26</span></a>
+
+      <button id="theme-toggle" title="Toggle light or dark theme" aria-label="Toggle theme">&#9680;</button>
+    </header>
+    
+    <main class="content">
+      
+      
+<input type="radio" name="mbi-tabs" id="tab-metrics" class="tabradio" aria-label="Metric catalogue" checked><input type="radio" name="mbi-tabs" id="tab-sources" class="tabradio" aria-label="Sources"><input type="radio" name="mbi-tabs" id="tab-status" class="tabradio" aria-label="Report status rules"><input type="radio" name="mbi-tabs" id="tab-glossary" class="tabradio" aria-label="Glossary"><div class="tabs tabs-css"><label for="tab-metrics">Metric catalogue</label><label for="tab-sources">Sources</label><label for="tab-status">Report status rules</label><label for="tab-glossary">Glossary</label></div>
+
+
+<section id="metrics" class="tabpanel">
+  <div class="card"><h2>Canonical metrics (config/metrics_catalog.yaml)</h2>
+  <p class="small">Every published number is computed once, by the function named here in <code>mbi/metrics/calc.py</code> (Decimal arithmetic, rounding only at display). Yields in percent; yield changes in basis points; changes in ratios and rates in percentage points; baselines chosen from dates that actually have observations, with the baseline date shown.</p>
+  <input type="search" data-filter-for="mtab" placeholder="Filter metrics" aria-label="Filter metrics">
+  <div class="table-wrap"><table id="mtab" class="sortable"><thead><tr><th>ID</th><th>Name</th><th>Unit</th><th>Baseline</th><th>Implementation</th><th>Sources</th></tr></thead><tbody>
+  <tr id="idx_close"><td><code>IDX_CLOSE</code></td><td>Index close</td><td class="tiny">index points</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">nse_indices_close (IN); fred (SPX; DJIA; COMP close-only); nasdaq_quote (COMP; NDX OHLC); fred NIKKEI225; yahoo_chart (FTSE; HSI; opt-in)</td></tr><tr id="idx_ohlc"><td><code>IDX_OHLC</code></td><td>Index open, high, low, close</td><td class="tiny">index points</td><td class="tiny">none</td>
+    <td class="tiny"><code>mbi.quality.checks.validate_ohlc (validation only)</code></td><td class="tiny">nse_indices_close; nasdaq_quote</td></tr><tr id="idx_dod_pct"><td><code>IDX_DOD_PCT</code></td><td>Index daily change (percent)</td><td class="tiny">percent</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(close / previous_session_close - 1) * 100</div></td><td class="tiny">as IDX_CLOSE; previous close from the same source</td></tr><tr id="idx_dod_abs"><td><code>IDX_DOD_ABS</code></td><td>Index daily change (points)</td><td class="tiny">index points</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.abs_change</code><div>close - previous_session_close</div></td><td class="tiny">as IDX_CLOSE</td></tr><tr id="idx_wow_pct"><td><code>IDX_WOW_PCT</code></td><td>Index weekly change (percent)</td><td class="tiny">percent</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.pct_change with calc.week_baseline</code><div>(close at report date / close at week baseline - 1) * 100</div></td><td class="tiny">as IDX_CLOSE</td></tr><tr id="stk_dod_pct"><td><code>STK_DOD_PCT</code></td><td>Stock daily return (movers)</td><td class="tiny">percent</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(close / previous close - 1) * 100 with corporate-action adjusted previous close for India</div></td><td class="tiny">nse_bhavcopy (IN); nasdaq_screener (US; opt-in)</td></tr><tr id="movers_rank"><td><code>MOVERS_RANK</code></td><td>Top and bottom movers</td><td class="tiny">rank</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>mbi.market.analytics.india_movers / us_movers</code><div>rank by STK_DOD_PCT descending (top) and ascending (bottom); ties broken by higher traded value, then symbol</div></td><td class="tiny">nse_bhavcopy; nasdaq_screener</td></tr><tr id="flow_net_cash"><td><code>FLOW_NET_CASH</code></td><td>FII/FPI and DII net investment, cash market (provisional)</td><td class="tiny">INR crore</td><td class="tiny">none (daily); weekly sum over Friday to Thursday in the weekly review</td>
+    <td class="tiny"><code>calc.net_flow</code><div>gross purchase - gross sale</div></td><td class="tiny">nse_fiidii (NSE provisional; exchange-compiled)</td></tr><tr id="gsec10_yield"><td><code>GSEC10_YIELD</code></td><td>India 10-year G-Sec yield (CCIL)</td><td class="tiny">percent (semi-annual yield to maturity)</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">ccil (tenor-wise indicative yields; 9Y-10Y GoI bucket); ccil_manual_import</td></tr><tr id="gsec10_dod_bps"><td><code>GSEC10_DOD_BPS</code></td><td>India 10Y daily change (bps)</td><td class="tiny">basis points</td><td class="tiny">previous_session</td>
+    <td class="tiny"><code>calc.bps_change</code><div>(yield - previous session yield) * 100</div></td><td class="tiny">ccil</td></tr><tr id="gsec10_wow_bps"><td><code>GSEC10_WOW_BPS</code></td><td>India 10Y weekly change (bps)</td><td class="tiny">basis points</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.bps_change with calc.week_baseline</code><div>(yield at report date - yield at week baseline) * 100</div></td><td class="tiny">ccil</td></tr><tr id="gsec_curve_yield"><td><code>GSEC_CURVE_YIELD</code></td><td>G-Sec curve point (CCIL tenor bucket)</td><td class="tiny">percent</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">ccil</td></tr><tr id="gsec_effective_annual"><td><code>GSEC_EFFECTIVE_ANNUAL</code></td><td>Effective annual yield</td><td class="tiny">percent (annual compounding)</td><td class="tiny">none</td>
+    <td class="tiny"><code>calc.effective_annual_yield</code><div>((1 + y / 100 / m) ^ m - 1) * 100 with m = 2</div></td><td class="tiny">derived from GSEC_CURVE_YIELD</td></tr><tr id="tbill_gsec_spread_bps"><td><code>TBILL_GSEC_SPREAD_BPS</code></td><td>Spread of G-Sec tenor over the 364-day T-bill</td><td class="tiny">basis points</td><td class="tiny">none; shown for report date, 1 week, 1 month, 3 months</td>
+    <td class="tiny"><code>calc.spread_bps</code><div>(G-Sec tenor yield - 364-day T-bill yield) * 100</div></td><td class="tiny">ccil (both legs must come from the same CCIL page and date)</td></tr><tr id="auction_cutoff_yield"><td><code>AUCTION_CUTOFF_YIELD</code></td><td>Auction cut-off yield</td><td class="tiny">percent</td><td class="tiny">previous auction of the same security or tenor</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (G-Sec full auction results; T-bill auction results)</td></tr><tr id="auction_bid_cover"><td><code>AUCTION_BID_COVER</code></td><td>Bid-to-cover ratio (standard)</td><td class="tiny">ratio</td><td class="tiny">none</td>
+    <td class="tiny"><code>calc.bid_cover_ratio</code><div>competitive bids received / notified amount</div></td><td class="tiny">rbi_releases</td></tr><tr id="global10y_yield"><td><code>GLOBAL10Y_YIELD</code></td><td>Global 10-year government yields</td><td class="tiny">percent</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">us_treasury (par yield curve 10Y); boe_yields (fitted nominal par yield 10Y); bundesbank_yields (Svensson fitted 10Y); mof_jgb (MoF JGB 10Y)</td></tr><tr id="global10y_wow_bps"><td><code>GLOBAL10Y_WOW_BPS</code></td><td>Global 10Y weekly change (bps)</td><td class="tiny">basis points</td><td class="tiny">week</td>
+    <td class="tiny"><code>calc.bps_change with calc.week_baseline</code><div>(yield at report date - yield at week baseline) * 100</div></td><td class="tiny">as GLOBAL10Y_YIELD</td></tr><tr id="mm_rate"><td><code>MM_RATE</code></td><td>Call money and TREPS weighted average rates</td><td class="tiny">percent</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (Money Market Operations)</td></tr><tr id="liq_net_injection"><td><code>LIQ_NET_INJECTION</code></td><td>Net liquidity injected (+) / absorbed (-)</td><td class="tiny">INR crore</td><td class="tiny">none; weekly average over Monday to Thursday (legacy) and Friday to Thursday</td>
+    <td class="tiny"><code>calc.net_liquidity (reconciliation of the RBI total)</code><div>repo + variable repo + MSF + SLF + OMO purchase - reverse repo - variable reverse repo - SDF - OMO sale</div></td><td class="tiny">rbi_releases (Money Market Operations total including outstanding operations; WSS table 8 daily)</td></tr><tr id="net_durable_liq"><td><code>NET_DURABLE_LIQ</code></td><td>Net durable liquidity</td><td class="tiny">INR crore</td><td class="tiny">none</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (Money Market Operations item I)</td></tr><tr id="usdinr_ref"><td><code>USDINR_REF</code></td><td>USD/INR reference rate</td><td class="tiny">INR per USD</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fbil (FBIL reference rate; primary); ecb_fx (ECB reference cross; cross-check)</td></tr><tr id="fx_pct_change"><td><code>FX_PCT_CHANGE</code></td><td>FX change (percent)</td><td class="tiny">percent</td><td class="tiny">previous_session; week</td>
+    <td class="tiny"><code>calc.pct_change with calc.fx_direction_label</code><div>(rate / baseline rate - 1) * 100; for USD/INR a positive change means rupee depreciation</div></td><td class="tiny">fbil; ecb_fx (EUR/USD; GBP/USD and USD/JPY reference crosses)</td></tr><tr id="usd_broad_index"><td><code>USD_BROAD_INDEX</code></td><td>Nominal broad US dollar index (Federal Reserve)</td><td class="tiny">index (Jan 2006 = 100)</td><td class="tiny">week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fred DTWEXBGS</td></tr><tr id="fxres_level"><td><code>FXRES_LEVEL</code></td><td>RBI foreign exchange reserves (total and components)</td><td class="tiny">USD million</td><td class="tiny">week; month; year</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">rbi_releases (WSS extract table 2)</td></tr><tr id="fxres_pct_change"><td><code>FXRES_PCT_CHANGE</code></td><td>Reserves change (percent)</td><td class="tiny">percent</td><td class="tiny">week; month; year</td>
+    <td class="tiny"><code>calc.pct_change</code><div>(level / baseline level - 1) * 100</div></td><td class="tiny">rbi_releases</td></tr><tr id="crude_spot"><td><code>CRUDE_SPOT</code></td><td>Brent and WTI spot price</td><td class="tiny">USD per barrel</td><td class="tiny">week</td>
+    <td class="tiny"><code>none (observed value)</code></td><td class="tiny">fred DCOILBRENTEU; fred DCOILWTICO (US EIA)</td></tr><tr id="us_initial_claims"><td><code>US_INITIAL_CLAIMS</code></td><td>US initial jobless claims</td><td class="tiny">persons (shown in thousands)</td><td class="tiny">previous release week</td>
+    <td class="tiny"><code>calc.abs_change for the weekly change</code></td><td class="tiny">fred ICSA (US Department of Labor)</td></tr><tr id="scb_business"><td><code>SCB_BUSINESS</code></td><td>Scheduled commercial banks - deposits, bank credit, food and non-food credit</td><td class="tiny">INR crore</td><td class="tiny">fortnight; financial year so far; year (as published)</td>
+    <td class="tiny"><code>calc.pct_change for level changes</code></td><td class="tiny">rbi_releases (WSS extract table 4)</td></tr><tr id="scb_ratio_pp"><td><code>SCB_RATIO_PP</code></td><td>Credit to deposit ratio and its change</td><td class="tiny">percent (ratio) and percentage points (change)</td><td class="tiny">fortnight; year</td>
+    <td class="tiny"><code>calc.ratio_pct and calc.pp_change</code><div>bank credit / aggregate deposits * 100; change = ratio - baseline ratio (percentage points)</div></td><td class="tiny">derived from SCB_BUSINESS</td></tr>
+  </tbody></table></div></div>
+</section>
+
+
+<section id="sources" class="tabpanel">
+  <div class="card"><h2>Sources on the public pages</h2>
+  <ul class="small">
+    <li>Charts and data files use only series whose publishers allow redistribution: US Treasury, Bank of England, Deutsche Bundesbank, Japan Ministry of Finance, ECB reference rates, EIA crude spot prices (via FRED) and RBI money market, liquidity and reserves releases.</li>
+    <li>Index levels, exchange statistics and benchmark rates (NSE, BSE, CCIL, FBIL and index providers) are not reproduced as tables, charts or files. The written analysis quotes single closing values, with the source named in brackets after each sentence.</li>
+    <li>News summaries are our own one or two sentences, each linking to the publisher's article.</li>
+  </ul></div>
+</section>
+
+
+<section id="status" class="tabpanel">
+  <div class="card"><h2>Report status</h2>
+  <ul class="small">
+    <li><strong>Verified</strong>: every critical gate passed (India index close and OHLC, change versus provider, US index close, CCIL 10-year, USD/INR reference for the session, narrative audit, independent recompute, text lint).</li>
+    <li><strong>Partial</strong>: useful content exists but at least one critical gate failed; the failures are listed at the top of the report.</li>
+    <li><strong>Failed</strong>: neither the India index close nor the CCIL yield is available, so a summary would mislead and is withheld.</li>
+    <li><strong>Stale</strong>: an observation older than the session it is reported for; always labelled with its own date.</li>
+    <li><strong>Not applicable</strong>: market closed (holiday shown) or the provider does not publish the field.</li>
+  </ul>
+  <p class="small">Narrative audit per sentence: evidence present, numbers match the stored values, causal wording only in hedged interpretations, no overstated certainty, direction words match the computed sign, news published after a close is never used to explain that session, older observations labelled with their date, no en or em dashes. Failing sentences are withheld and listed in Data quality.</p></div>
+</section>
+
+
+
+<section id="glossary" class="tabpanel">
+  <div class="card"><h2>Glossary</h2>
+  <p class="small">Every (i) button on the dashboard links here. Definitions come from <code>config/glossary.yaml</code>.</p>
+  <div id="glossary-nifty50" class="memo-section"><h4>Nifty 50</h4>
+    <div class="small"><b>What it is:</b> India&#39;s benchmark index of 50 large, liquid NSE-listed companies, weighted by free-float market value.</div>
+    <div class="small"><b>How it is measured:</b> Level as published by NSE Indices in the daily index close file; daily change is close versus the previous session&#39;s close.</div>
+    <div class="small"><b>Why it matters:</b> The quickest read on Indian equity sentiment and on the value of listed holdings, ESOPs and fundraising conditions.</div></div>
+  <div id="glossary-sensex" class="memo-section"><h4>BSE Sensex</h4>
+    <div class="small"><b>What it is:</b> BSE&#39;s index of 30 large Indian companies.</div>
+    <div class="small"><b>How it is measured:</b> Close as displayed by Google Finance (BSE does not allow automated access); close only, no intraday range.</div>
+    <div class="small"><b>Why it matters:</b> The index most often quoted in Indian media; moves closely with the Nifty 50.</div></div>
+  <div id="glossary-niftybank" class="memo-section"><h4>Nifty Bank</h4>
+    <div class="small"><b>What it is:</b> Index of the most liquid Indian bank stocks.</div>
+    <div class="small"><b>How it is measured:</b> NSE Indices daily close file.</div>
+    <div class="small"><b>Why it matters:</b> Banks are sensitive to interest rates, credit growth and liquidity, so this index reflects the rate cycle.</div></div>
+  <div id="glossary-midsmall" class="memo-section"><h4>Midcap and smallcap indices</h4>
+    <div class="small"><b>What it is:</b> Nifty Midcap 100 and Nifty Smallcap 100, the next tiers of companies by size.</div>
+    <div class="small"><b>How it is measured:</b> NSE Indices daily close file.</div>
+    <div class="small"><b>Why it matters:</b> Their moves relative to the Nifty 50 show whether risk appetite is broad or concentrated in large caps.</div></div>
+  <div id="glossary-us_indices" class="memo-section"><h4>US and global equity indices</h4>
+    <div class="small"><b>What it is:</b> S&amp;P 500 (500 large US companies), Nasdaq Composite (technology-heavy), Dow Jones (30 blue chips), and major Asian and European indices.</div>
+    <div class="small"><b>How it is measured:</b> US closes from FRED and Nasdaq; other markets from Google Finance closes. The US session shown is the latest one completed before the report.</div>
+    <div class="small"><b>Why it matters:</b> Overnight US moves and same-day Asian moves set the tone for Indian trading and foreign flows.</div></div>
+  <div id="glossary-indiavix" class="memo-section"><h4>India VIX</h4>
+    <div class="small"><b>What it is:</b> Expected Nifty volatility over the next 30 days, derived from option prices (the &#39;fear gauge&#39;).</div>
+    <div class="small"><b>How it is measured:</b> Published by NSE; higher means more uncertainty priced in.</div>
+    <div class="small"><b>Why it matters:</b> Rising VIX usually accompanies falling markets and higher hedging costs.</div></div>
+  <div id="glossary-breadth" class="memo-section"><h4>Market breadth</h4>
+    <div class="small"><b>What it is:</b> Number of stocks that rose (advances) versus fell (declines) on the day.</div>
+    <div class="small"><b>How it is measured:</b> NSE market activity report.</div>
+    <div class="small"><b>Why it matters:</b> A rising index with more decliners than advancers means the move is narrow and fragile.</div></div>
+  <div id="glossary-fii_dii" class="memo-section"><h4>FII/FPI and DII flows</h4>
+    <div class="small"><b>What it is:</b> Net buying (+) or selling (-) of Indian shares by foreign portfolio investors and domestic institutions.</div>
+    <div class="small"><b>How it is measured:</b> NSE provisional cash-market data (combined NSE, BSE, MSEI) for the day; NSDL publishes final depository data later.</div>
+    <div class="small"><b>Why it matters:</b> Foreign flows move the rupee and large caps; persistent selling is a headwind for both.</div></div>
+  <div id="glossary-gsec10y" class="memo-section"><h4>India 10-year G-Sec yield (CCIL)</h4>
+    <div class="small"><b>What it is:</b> The yield on the Government of India bond in the 9 to 10 year bucket, the benchmark for long-term borrowing costs in India.</div>
+    <div class="small"><b>How it is measured:</b> CCIL tenor-wise indicative yield (only source permitted). Change in basis points (1 bp = 0.01%). Yield up means bond price down.</div>
+    <div class="small"><b>Why it matters:</b> Anchors corporate bond, loan and deposit pricing; rising yields raise the cost of long-term debt.</div></div>
+  <div id="glossary-gsec_curve" class="memo-section"><h4>Government yield curve</h4>
+    <div class="small"><b>What it is:</b> Yields of government bonds across maturities, from 3 months to 40 years.</div>
+    <div class="small"><b>How it is measured:</b> India from the FBIL par yield curve (10-year point from CCIL), US from the US Treasury, UK from the Bank of England, Germany from the Bundesbank, Japan from the Ministry of Finance.</div>
+    <div class="small"><b>Why it matters:</b> The slope shows what markets expect for growth and policy rates; an inverted curve often precedes slowdowns.</div></div>
+  <div id="glossary-par_yield" class="memo-section"><h4>Par yield</h4>
+    <div class="small"><b>What it is:</b> The coupon at which a bond of that maturity would trade at face value, read from a fitted curve.</div>
+    <div class="small"><b>How it is measured:</b> FBIL fits the curve to traded and polled government bond prices every business day.</div>
+    <div class="small"><b>Why it matters:</b> Gives a clean yield for any maturity, even where no single benchmark bond exists.</div></div>
+  <div id="glossary-spread" class="memo-section"><h4>Yield spread</h4>
+    <div class="small"><b>What it is:</b> The difference between two yields, in basis points.</div>
+    <div class="small"><b>How it is measured:</b> Yield A minus yield B on the same date, times 100.</div>
+    <div class="small"><b>Why it matters:</b> India minus US 10Y shows the extra return foreign investors earn in Indian bonds; a narrowing spread can trigger outflows.</div></div>
+  <div id="glossary-tbill" class="memo-section"><h4>Treasury bill yield</h4>
+    <div class="small"><b>What it is:</b> The yield on short-term government bills (91, 182 and 364 days).</div>
+    <div class="small"><b>How it is measured:</b> RBI weekly auction cut-offs and FBIL daily benchmark yields.</div>
+    <div class="small"><b>Why it matters:</b> The reference for short-term investment returns and for pricing working-capital borrowing.</div></div>
+  <div id="glossary-bid_cover" class="memo-section"><h4>Bid-to-cover ratio</h4>
+    <div class="small"><b>What it is:</b> How many times an auction was subscribed.</div>
+    <div class="small"><b>How it is measured:</b> Competitive bids received divided by the notified amount.</div>
+    <div class="small"><b>Why it matters:</b> Strong demand at government auctions keeps yields in check; weak demand pushes them up.</div></div>
+  <div id="glossary-call_rate" class="memo-section"><h4>Call money and TREPS rates</h4>
+    <div class="small"><b>What it is:</b> The overnight rates at which banks and institutions lend to each other, unsecured (call) or against government securities (TREPS).</div>
+    <div class="small"><b>How it is measured:</b> Volume-weighted averages published by RBI in the daily Money Market Operations release.</div>
+    <div class="small"><b>Why it matters:</b> The shortest-term cost of money; they track RBI policy and system liquidity and drive overnight deposit returns.</div></div>
+  <div id="glossary-liquidity" class="memo-section"><h4>System liquidity</h4>
+    <div class="small"><b>What it is:</b> Net money RBI is adding to (+) or absorbing from (-) the banking system.</div>
+    <div class="small"><b>How it is measured:</b> RBI&#39;s net liquidity figure (repo, MSF, SLF, OMO purchases minus reverse repo, SDF, OMO sales).</div>
+    <div class="small"><b>Why it matters:</b> A large surplus pushes short-term rates down; a deficit pushes them up and tightens credit.</div></div>
+  <div id="glossary-policy_rates" class="memo-section"><h4>RBI policy rates</h4>
+    <div class="small"><b>What it is:</b> Repo (RBI&#39;s lending rate to banks), SDF (deposit facility), MSF (emergency borrowing), CRR and SLR reserve ratios.</div>
+    <div class="small"><b>How it is measured:</b> As shown in force on the RBI website.</div>
+    <div class="small"><b>Why it matters:</b> Set the floor and ceiling for short-term interest rates in India.</div></div>
+  <div id="glossary-usdinr" class="memo-section"><h4>USD/INR reference rate</h4>
+    <div class="small"><b>What it is:</b> Rupees per US dollar.</div>
+    <div class="small"><b>How it is measured:</b> FBIL&#39;s daily reference rate (set around 13:30 IST), also republished by RBI. A reference rate, not a trading high or low.</div>
+    <div class="small"><b>Why it matters:</b> Drives the rupee cost of imports, dollar debt and the rupee value of export earnings; up means a weaker rupee.</div></div>
+  <div id="glossary-fx_cross" class="memo-section"><h4>Major currency pairs</h4>
+    <div class="small"><b>What it is:</b> EUR/USD, GBP/USD and USD/JPY.</div>
+    <div class="small"><b>How it is measured:</b> Derived from ECB 14:15 CET reference rates.</div>
+    <div class="small"><b>Why it matters:</b> Show the dollar&#39;s broad direction, which feeds into the rupee and global capital flows.</div></div>
+  <div id="glossary-usd_index" class="memo-section"><h4>Broad US dollar index</h4>
+    <div class="small"><b>What it is:</b> The dollar&#39;s value against a broad basket of trading partners&#39; currencies.</div>
+    <div class="small"><b>How it is measured:</b> Federal Reserve nominal broad index via FRED (not the ICE DXY, which is licensed).</div>
+    <div class="small"><b>Why it matters:</b> A stronger dollar usually means weaker emerging-market currencies and tighter global financial conditions.</div></div>
+  <div id="glossary-reserves" class="memo-section"><h4>Foreign exchange reserves</h4>
+    <div class="small"><b>What it is:</b> RBI&#39;s holdings of foreign currency, gold, SDRs and IMF reserve position.</div>
+    <div class="small"><b>How it is measured:</b> RBI Weekly Statistical Supplement, as on the previous Friday.</div>
+    <div class="small"><b>Why it matters:</b> Reserves are RBI&#39;s buffer to steady the rupee; falling reserves often mean RBI is selling dollars.</div></div>
+  <div id="glossary-crude" class="memo-section"><h4>Brent and WTI crude</h4>
+    <div class="small"><b>What it is:</b> International crude oil benchmarks in USD per barrel.</div>
+    <div class="small"><b>How it is measured:</b> US EIA spot prices via FRED, published with a lag of a few days.</div>
+    <div class="small"><b>Why it matters:</b> India imports most of its oil; higher crude raises costs, inflation and the import bill, and weakens the rupee.</div></div>
+  <div id="glossary-global_yields" class="memo-section"><h4>Global 10-year yields</h4>
+    <div class="small"><b>What it is:</b> Benchmark long-term government yields in the US, UK, Germany and Japan.</div>
+    <div class="small"><b>How it is measured:</b> Official curve points from each country&#39;s treasury or central bank.</div>
+    <div class="small"><b>Why it matters:</b> Global rates set the opportunity cost of capital and drive cross-border flows into India.</div></div>
+  <div id="glossary-movers" class="memo-section"><h4>Top and bottom movers</h4>
+    <div class="small"><b>What it is:</b> The five biggest daily gainers and losers.</div>
+    <div class="small"><b>How it is measured:</b> Close versus previous close. Liquid list requires traded value above INR 10 crore; broad list has no turnover filter.</div>
+    <div class="small"><b>Why it matters:</b> Shows where the day&#39;s action was; check the driver column before reading anything into a single stock move.</div></div>
+  <div id="glossary-factor_check" class="memo-section"><h4>Factor check</h4>
+    <div class="small"><b>What it is:</b> The measured forces that usually move Indian markets, each marked supportive or a headwind.</div>
+    <div class="small"><b>How it is measured:</b> Values from the day&#39;s data; the direction is the standard market relationship, not proof of what caused the move.</div>
+    <div class="small"><b>Why it matters:</b> Lets you see at a glance whether global cues, flows, rates, the rupee and oil were helping or hurting.</div></div>
+  <div id="glossary-commentary" class="memo-section"><h4>Why markets moved (written analysis)</h4>
+    <div class="small"><b>What it is:</b> A short explanation of the day&#39;s moves in equities, bonds and the rupee.</div>
+    <div class="small"><b>How it is measured:</b> Written at the 19:00 run from the day&#39;s data and news published before the close; every sentence cites its sources and is audited for numbers and wording.</div>
+    <div class="small"><b>Why it matters:</b> Connects the numbers to the news so decisions can be made on the reasons, not just the levels.</div></div>
+  <div id="glossary-cfo_lens" class="memo-section"><h4>CFO lens</h4>
+    <div class="small"><b>What it is:</b> What the day&#39;s moves mean for a company&#39;s treasury: borrowing costs, FX exposure, liquidity and input costs.</div>
+    <div class="small"><b>How it is measured:</b> Drawn from the verified figures above; general guidance, not advice for a specific company.</div>
+    <div class="small"><b>Why it matters:</b> Turns market data into decisions on hedging, funding and cash deployment.</div></div>
+  <div id="glossary-sparkline" class="memo-section"><h4>Trend line</h4>
+    <div class="small"><b>What it is:</b> The last 30 observations of the series.</div>
+    <div class="small"><b>How it is measured:</b> Drawn from stored history; the endpoint is today&#39;s value.</div>
+    <div class="small"><b>Why it matters:</b> Puts the day&#39;s move in context of the recent trend.</div></div>
+  <div id="glossary-momentum" class="memo-section"><h4>Momentum and relative strength (momentum_rs)</h4>
+    <div class="small"><b>What it is:</b> How strongly the stock has risen, and how it has done against the Nifty 500.</div>
+    <div class="small"><b>How it is measured:</b> Half is the percentile rank (0 to 100, within the screened universe) of the 12-1 month return (price 21 sessions ago over price 252 sessions ago, skipping the latest month; the 6-month return is used when there is less than a year of history). The other half is the percentile rank of the 6-month return minus the Nifty 500&#39;s 6-month return. Weight 14% of the radar score.</div>
+    <div class="small"><b>Why it matters:</b> Stocks that have outperformed tend to keep doing so for a while; a very high reading can also mean the stock is stretched.</div></div>
+  <div id="glossary-quality" class="memo-section"><h4>Quality and resilience (quality_resilience)</h4>
+    <div class="small"><b>What it is:</b> How profitable and financially sound the business was in its latest fiscal year.</div>
+    <div class="small"><b>How it is measured:</b> Average of up to three parts, each capped at 0 to 100: ROCE x 400 (25% ROCE scores 100), operating margin x 400 (25% margin scores 100) and 100 minus 25 x net debt to EBITDA (4x scores 0). Uses only stored filings; missing when no financials are loaded. Weight 14%.</div>
+    <div class="small"><b>Why it matters:</b> High-return, low-debt businesses compound value more reliably and survive downturns.</div></div>
+  <div id="glossary-growth" class="memo-section"><h4>Growth trajectory (growth_trajectory)</h4>
+    <div class="small"><b>What it is:</b> How fast revenue grew and how well profit turned into cash in the latest fiscal year.</div>
+    <div class="small"><b>How it is measured:</b> Average of 50 + 200 x revenue growth (25% growth scores 100, a 25% decline scores 0) and 70 x cash conversion (operating cash flow over net profit; about 1.4x scores 100), each capped at 0 to 100. Weight 12%.</div>
+    <div class="small"><b>Why it matters:</b> Sustained growth backed by cash, not just accounting profit, drives multibagger outcomes.</div></div>
+  <div id="glossary-valuation_score" class="memo-section"><h4>Valuation gap (valuation_gap)</h4>
+    <div class="small"><b>What it is:</b> How far the price is below or above the dossier&#39;s intrinsic value.</div>
+    <div class="small"><b>How it is measured:</b> 50 + 100 x (intrinsic value base / price - 1), capped at 0 to 100: 50 means price equals intrinsic value, 100 means price is half of it or less. Only available after a dossier publishes a buy zone. Weight 14%.</div>
+    <div class="small"><b>Why it matters:</b> Paying well below estimated value leaves room for error; paying above it caps returns.</div></div>
+  <div id="glossary-intrinsic_value" class="memo-section"><h4>Intrinsic value</h4>
+    <div class="small"><b>What it is:</b> An estimate of what the business is worth per share from the cash it can generate.</div>
+    <div class="small"><b>How it is measured:</b> FCFF discounted cash flow: revenue grows at a bounded 3-year historical rate fading to 5% over 10 years, operating margin converges to its 3-year average, reinvestment follows a sales-to-capital ratio, and the terminal value uses ROIC-consistent reinvestment. Equity value = enterprise value - net debt, divided by the share count. The range is the central part of the WACC and terminal growth sensitivity grid.</div>
+    <div class="small"><b>Why it matters:</b> A history-based DCF deliberately ignores hoped-for new products; a price far above it means the market is pricing a step change (see reverse DCF).</div></div>
+  <div id="glossary-reverse_dcf" class="memo-section"><h4>Reverse DCF (what is priced in)</h4>
+    <div class="small"><b>What it is:</b> The revenue growth the current price implies.</div>
+    <div class="small"><b>How it is measured:</b> Solves the same DCF for the constant 5-year revenue growth (then fading) that makes DCF enterprise value equal market enterprise value, searching between -20% and +60% a year. Outside that range the bound is reported.</div>
+    <div class="small"><b>Why it matters:</b> If implied growth is far above what the company has delivered or guided, expectations are demanding.</div></div>
+  <div id="glossary-mos" class="memo-section"><h4>Margin of safety</h4>
+    <div class="small"><b>What it is:</b> How far below intrinsic value the price is.</div>
+    <div class="small"><b>How it is measured:</b> (Intrinsic value minus price) divided by intrinsic value.</div>
+    <div class="small"><b>Why it matters:</b> A buffer against estimation errors; a larger margin lowers the risk of overpaying.</div></div>
+  <div id="glossary-wacc" class="memo-section"><h4>Discount rate (cost of equity and WACC)</h4>
+    <div class="small"><b>What it is:</b> The return investors require, used to discount future cash flows.</div>
+    <div class="small"><b>How it is measured:</b> India: an assumed 13% rupee cost of equity (long-run government yield of about 7% plus an equity risk premium of about 6%), blended with the after-tax cost of debt by capital structure. The CCIL 10-year yield is shown alongside for context but is not substituted. The sensitivity table shows values at other rates.</div>
+    <div class="small"><b>Why it matters:</b> A higher discount rate lowers intrinsic value; small changes matter a lot for long-duration growth stocks.</div></div>
+  <div id="glossary-pe" class="memo-section"><h4>P/E ratio</h4>
+    <div class="small"><b>What it is:</b> Price divided by earnings per share.</div>
+    <div class="small"><b>How it is measured:</b> Market price over trailing twelve-month EPS.</div>
+    <div class="small"><b>Why it matters:</b> How many years of current earnings the market is paying for.</div></div>
+  <div id="glossary-ev_ebitda" class="memo-section"><h4>EV/EBITDA</h4>
+    <div class="small"><b>What it is:</b> Enterprise value (market value plus net debt) divided by operating profit before depreciation.</div>
+    <div class="small"><b>How it is measured:</b> From the latest price, balance sheet and trailing EBITDA.</div>
+    <div class="small"><b>Why it matters:</b> Compares companies with different debt levels on the same footing.</div></div>
+  <div id="glossary-pb" class="memo-section"><h4>Price to book</h4>
+    <div class="small"><b>What it is:</b> Market value divided by shareholders&#39; equity.</div>
+    <div class="small"><b>How it is measured:</b> Price over book value per share.</div>
+    <div class="small"><b>Why it matters:</b> Useful for banks and asset-heavy businesses.</div></div>
+  <div id="glossary-roce" class="memo-section"><h4>ROCE</h4>
+    <div class="small"><b>What it is:</b> Return on capital employed.</div>
+    <div class="small"><b>How it is measured:</b> Dossier tables: EBIT / average (total assets - current liabilities). Relative value table: TTM operating profit (profit before exceptional items and tax + finance costs - other income) / (equity + borrowings).</div>
+    <div class="small"><b>Why it matters:</b> How efficiently the business turns capital into operating profit; sustained high ROCE is a hallmark of compounders.</div></div>
+  <div id="glossary-relative_value" class="memo-section"><h4>Relative value</h4>
+    <div class="small"><b>What it is:</b> How a stock&#39;s multiples, returns and growth compare with a defined peer set.</div>
+    <div class="small"><b>How it is measured:</b> Each company is compared with the median of the other members of its peer set (config/peer_groups.yaml) on P/E, EV/EBITDA, P/B and EV/sales, and on ROCE, revenue growth and EBITDA margin. Premium = company multiple / peer median - 1.</div>
+    <div class="small"><b>Why it matters:</b> A discount is only attractive if quality and growth do not explain it.</div></div>
+  <div id="glossary-order_book" class="memo-section"><h4>Order book</h4>
+    <div class="small"><b>What it is:</b> Value of contracted orders not yet executed, as reported by the company.</div>
+    <div class="small"><b>How it is measured:</b> From results, investor presentations and earnings calls; order book to trailing revenue gives years of revenue visibility.</div>
+    <div class="small"><b>Why it matters:</b> For capital goods, defence and infrastructure companies, the order book is the best guide to future revenue.</div></div>
+  <div id="glossary-book_to_bill" class="memo-section"><h4>Book to bill</h4>
+    <div class="small"><b>What it is:</b> New orders won divided by revenue billed in the period.</div>
+    <div class="small"><b>How it is measured:</b> Order inflow over revenue for the quarter or year.</div>
+    <div class="small"><b>Why it matters:</b> Above 1 means the order book is growing.</div></div>
+  <div id="glossary-concall" class="memo-section"><h4>Earnings call summary</h4>
+    <div class="small"><b>What it is:</b> Key points from management&#39;s quarterly call with analysts: results, guidance, demand, margins, capex, order book, risks and analysts&#39; concerns.</div>
+    <div class="small"><b>How it is measured:</b> Summarised from the transcript filed with NSE (or the company website when the filing only links to it). Every point carries the PDF page where it appears, verified by matching a phrase from the transcript. Drafts are marked as not yet reviewed by a human analyst.</div>
+    <div class="small"><b>Why it matters:</b> Management commentary often signals changes before they show up in the numbers.</div></div>
+  <div id="glossary-red_flags" class="memo-section"><h4>Red flags</h4>
+    <div class="small"><b>What it is:</b> Accounting, governance or balance-sheet warning signs.</div>
+    <div class="small"><b>How it is measured:</b> Rules on cash conversion, related-party transactions, pledges, auditor remarks and receivables growth.</div>
+    <div class="small"><b>Why it matters:</b> Most permanent capital losses come from problems that were visible in the accounts.</div></div>
+  <div id="glossary-buy_zone" class="memo-section"><h4>Buy zone (accumulation range)</h4>
+    <div class="small"><b>What it is:</b> A conditional price range where the expected return clears the hurdle with a margin of safety.</div>
+    <div class="small"><b>How it is measured:</b> The top of the range is intrinsic value reduced by the required margin of safety (20% base, raised for weak management evidence, forensic flags, leverage, cyclicality or valuation disagreement; config/margin_of_safety.yaml), refined with technical support. The no-chase level is the highest price that still offers a 15% a year hurdle return in the base scenario. Withheld when evidence is incomplete or the committee vetoes.</div>
+    <div class="small"><b>Why it matters:</b> Disciplined entry prices improve returns and reduce the risk of chasing.</div></div>
+  <div id="glossary-rsi" class="memo-section"><h4>RSI (14)</h4>
+    <div class="small"><b>What it is:</b> Relative Strength Index, a 0 to 100 measure of recent gains versus losses.</div>
+    <div class="small"><b>How it is measured:</b> Average gain over average loss for 14 sessions, rescaled; above 70 is overbought, below 30 oversold.</div>
+    <div class="small"><b>Why it matters:</b> Helps time entries; not a valuation signal.</div></div>
+  <div id="glossary-atr" class="memo-section"><h4>ATR</h4>
+    <div class="small"><b>What it is:</b> Average True Range, the typical daily price swing.</div>
+    <div class="small"><b>How it is measured:</b> 14-session average of the true range (high minus low, adjusted for gaps).</div>
+    <div class="small"><b>Why it matters:</b> Used to size stop-losses and buy zones relative to normal volatility.</div></div>
+  <div id="glossary-sma" class="memo-section"><h4>Moving averages (50 and 200 day)</h4>
+    <div class="small"><b>What it is:</b> Average closing price over the last 50 or 200 sessions.</div>
+    <div class="small"><b>How it is measured:</b> Simple average of closes.</div>
+    <div class="small"><b>Why it matters:</b> Price above a rising 200-day average marks an uptrend.</div></div>
+  <div id="glossary-liquidity_stock" class="memo-section"><h4>Liquidity (stock)</h4>
+    <div class="small"><b>What it is:</b> How easily the stock can be bought or sold.</div>
+    <div class="small"><b>How it is measured:</b> Median daily traded value over 20 or 60 sessions.</div>
+    <div class="small"><b>Why it matters:</b> Illiquid stocks are hard to exit and their prices can be moved easily.</div></div>
+  <div id="glossary-conviction" class="memo-section"><h4>Conviction and decision status</h4>
+    <div class="small"><b>What it is:</b> The research committee&#39;s view after the red-team review.</div>
+    <div class="small"><b>How it is measured:</b> Combines scores, valuation, risks and evidence completeness; a veto withholds any buy range.</div>
+    <div class="small"><b>Why it matters:</b> Separates well-researched opportunities from interesting but unproven ideas.</div></div>
+  <div id="glossary-scenario" class="memo-section"><h4>Bear, base, bull and stress scenarios</h4>
+    <div class="small"><b>What it is:</b> Value outcomes under pessimistic, central, optimistic and tail assumptions.</div>
+    <div class="small"><b>How it is measured:</b> Different revenue growth, margin, exit P/E and dilution assumptions applied over 3 and 5 year horizons. Likelihood bands are descriptive; numerical probabilities are not shown because no calibrated model exists.</div>
+    <div class="small"><b>Why it matters:</b> Shows the range of outcomes rather than a single point estimate.</div></div>
+  <div id="glossary-trend_structure" class="memo-section"><h4>Trend structure</h4>
+    <div class="small"><b>What it is:</b> Whether the price trend is healthy.</div>
+    <div class="small"><b>How it is measured:</b> 35 points if the close is above its 200-day average, 25 if the 50-day average is above the 200-day, plus 0.4 x the percentile rank of distance from the 52-week high (closer scores higher). Weight 8%.</div>
+    <div class="small"><b>Why it matters:</b> Confirms that momentum comes with an orderly uptrend rather than a spike.</div></div>
+  <div id="glossary-accumulation" class="memo-section"><h4>Accumulation</h4>
+    <div class="small"><b>What it is:</b> Signs of investors building positions.</div>
+    <div class="small"><b>How it is measured:</b> Percentile rank of the delivery-percentage trend (average delivery % over 20 sessions divided by the prior 60), plus 10 points per disclosed bulk or block buy in 60 days (at most 20), capped at 100. Weight 6%.</div>
+    <div class="small"><b>Why it matters:</b> Rising delivery and disclosed buying suggest genuine investor demand, not intraday trading.</div></div>
+  <div id="glossary-tailwinds" class="memo-section"><h4>Sector tailwinds</h4>
+    <div class="small"><b>What it is:</b> Whether the company&#39;s sector is outperforming.</div>
+    <div class="small"><b>How it is measured:</b> Percentile rank of the sector index&#39;s 3-month return minus the Nifty 500&#39;s 3-month return. Missing when the sector has no NSE index. Weight 6%.</div>
+    <div class="small"><b>Why it matters:</b> Stocks in leading sectors have the wind at their back.</div></div>
+  <div id="glossary-downside" class="memo-section"><h4>Downside resilience</h4>
+    <div class="small"><b>What it is:</b> How severe the stock&#39;s falls and swings have been.</div>
+    <div class="small"><b>How it is measured:</b> Half is the percentile rank of the 1-year maximum drawdown (smaller drawdown scores higher), half the percentile rank of 63-day annualised volatility (lower volatility scores higher). Weight 6%.</div>
+    <div class="small"><b>Why it matters:</b> Smaller drawdowns make a position easier to hold through bad periods.</div></div>
+  <div id="glossary-catalyst_score" class="memo-section"><h4>Catalyst</h4>
+    <div class="small"><b>What it is:</b> A dated event that could re-rate the stock.</div>
+    <div class="small"><b>How it is measured:</b> Scored 60 when the company appears in NSE corporate announcements in the last 30 days (evidence linked); otherwise missing, never zero. Weight 8%.</div>
+    <div class="small"><b>Why it matters:</b> Catalysts shorten the time for value to be recognised.</div></div>
+  <div id="glossary-radar_score" class="memo-section"><h4>Radar score and coverage</h4>
+    <div class="small"><b>What it is:</b> The overall research priority score (0 to 100).</div>
+    <div class="small"><b>How it is measured:</b> Weighted mean of the available components using config/scorecard_v1.yaml weights. Missing components are excluded and coverage (share of total weight available) is shown; they are never scored as zero. Weights were set by judgement, not fitted to past returns.</div>
+    <div class="small"><b>Why it matters:</b> A ranking of where to spend research time, not a buy signal.</div></div>
+  <div id="glossary-market_cap" class="memo-section"><h4>Market capitalisation</h4>
+    <div class="small"><b>What it is:</b> The stock market value of the company.</div>
+    <div class="small"><b>How it is measured:</b> Last official close x share count (paid-up equity capital divided by face value from the latest filing).</div>
+    <div class="small"><b>Why it matters:</b> Sets the scale for every multiple.</div></div>
+  <div id="glossary-ttm" class="memo-section"><h4>TTM (trailing twelve months)</h4>
+    <div class="small"><b>What it is:</b> The last four reported quarters added together.</div>
+    <div class="small"><b>How it is measured:</b> Sum of the latest four quarterly figures from exchange filings; when four quarters are not available the latest fiscal year is used and labelled.</div>
+    <div class="small"><b>Why it matters:</b> More current than the last annual report.</div></div>
+  <div id="glossary-ev_sales" class="memo-section"><h4>EV/sales</h4>
+    <div class="small"><b>What it is:</b> Enterprise value divided by TTM revenue.</div>
+    <div class="small"><b>How it is measured:</b> EV = market cap + borrowings - cash and current investments.</div>
+    <div class="small"><b>Why it matters:</b> Useful for loss-making or low-margin businesses where P/E is not meaningful.</div></div>
+  <div id="glossary-peg" class="memo-section"><h4>PEG</h4>
+    <div class="small"><b>What it is:</b> P/E divided by revenue growth in percent.</div>
+    <div class="small"><b>How it is measured:</b> TTM P/E / (TTM revenue growth x 100). Revenue growth is used because profit growth is too volatile for many companies.</div>
+    <div class="small"><b>Why it matters:</b> A rough way to see whether a high multiple is backed by growth; below 1 is cheap for the growth, above 2 is demanding.</div></div>
+  <div id="glossary-roe" class="memo-section"><h4>ROE</h4>
+    <div class="small"><b>What it is:</b> Return on equity.</div>
+    <div class="small"><b>How it is measured:</b> TTM profit attributable to owners (before exceptional items) / latest equity attributable to owners.</div>
+    <div class="small"><b>Why it matters:</b> The return the business earns on shareholders&#39; money; the key metric for lenders.</div></div>
+  <div id="glossary-revenue_growth_ttm" class="memo-section"><h4>Revenue growth (TTM)</h4>
+    <div class="small"><b>What it is:</b> How fast sales are growing.</div>
+    <div class="small"><b>How it is measured:</b> TTM revenue / revenue of the four quarters a year earlier - 1; latest fiscal year growth when eight quarters are not available.</div>
+    <div class="small"><b>Why it matters:</b> Growth is the main driver of long-term returns.</div></div>
+  <div id="glossary-ebitda_margin" class="memo-section"><h4>EBITDA margin</h4>
+    <div class="small"><b>What it is:</b> Operating profit before depreciation as a share of revenue.</div>
+    <div class="small"><b>How it is measured:</b> TTM EBITDA / TTM revenue, with EBITDA derived from filings (profit before exceptional items and tax + finance costs - other income + depreciation).</div>
+    <div class="small"><b>Why it matters:</b> Shows pricing power and cost control.</div></div>
+  <div id="glossary-net_debt_ebitda" class="memo-section"><h4>Net debt to EBITDA</h4>
+    <div class="small"><b>What it is:</b> How many years of operating profit would repay net debt.</div>
+    <div class="small"><b>How it is measured:</b> (Borrowings - cash and current investments) / TTM EBITDA. Negative means net cash.</div>
+    <div class="small"><b>Why it matters:</b> Above about 3x leaves little room for a downturn.</div></div>
+  <div id="glossary-order_book_cover" class="memo-section"><h4>Order book cover</h4>
+    <div class="small"><b>What it is:</b> Years of revenue already contracted.</div>
+    <div class="small"><b>How it is measured:</b> Latest disclosed order book / TTM revenue. Only for companies that disclose an order book; some (for example auto component makers) report lifetime programme value, which is not comparable with an EPC backlog.</div>
+    <div class="small"><b>Why it matters:</b> Revenue visibility for project and capital goods businesses.</div></div>
+  <div id="glossary-quadrant" class="memo-section"><h4>Relative value view</h4>
+    <div class="small"><b>What it is:</b> Where the stock sits against its peers on price and quality.</div>
+    <div class="small"><b>How it is measured:</b> Cheapness score: average percentile within the peer set of P/E, EV/EBITDA and P/B (lower multiple ranks higher). Quality score: average percentile of ROCE, revenue growth and EBITDA margin. Lenders use P/B and ROE. 50 or above is cheaper or higher quality than the typical peer. Descriptive, not a recommendation.</div>
+    <div class="small"><b>Why it matters:</b> Cheaper and higher quality than peers deserves a closer look; dearer and lower quality needs a strong reason.</div></div>
+  <div id="glossary-guidance_tracker" class="memo-section"><h4>Guidance tracker</h4>
+    <div class="small"><b>What it is:</b> Management&#39;s dated targets from earnings calls, checked later against results.</div>
+    <div class="small"><b>How it is measured:</b> Each statement is logged with the speaker, transcript page, metric, target and due date. When the due date passes, the outcome is assessed (achieved, partly achieved, missed, delayed) against filed results.</div>
+    <div class="small"><b>Why it matters:</b> A management team&#39;s record of meeting its own guidance is one of the best predictors of credibility.</div></div>
+  <div id="glossary-price_vs_intrinsic" class="memo-section"><h4>Price versus intrinsic value</h4>
+    <div class="small"><b>What it is:</b> How far the price is above or below the DCF base value.</div>
+    <div class="small"><b>How it is measured:</b> Price / intrinsic value base - 1. Positive means the price is above the history-based DCF value.</div>
+    <div class="small"><b>Why it matters:</b> Read together with the reverse DCF: a large premium means the market expects much faster growth than history.</div></div>
+  <div id="glossary-peer_implied_value" class="memo-section"><h4>Peer-implied value</h4>
+    <div class="small"><b>What it is:</b> What the share would be worth if the market valued the company like its peers.</div>
+    <div class="small"><b>How it is measured:</b> Median P/E of the other members of the peer set x this company&#39;s TTM profit (before exceptional items), and median EV/EBITDA x TTM EBITDA less net debt, each divided by the share count; the average of the two is shown. Lenders use median P/B x book value. Needs at least two other peers with data.</div>
+    <div class="small"><b>Why it matters:</b> A market-consistent cross-check on the history-based DCF; it says nothing about whether the whole peer group is cheap or expensive.</div></div>
+  <div id="glossary-ownership" class="memo-section"><h4>Ownership (shareholding pattern)</h4>
+    <div class="small"><b>What it is:</b> Who holds the shares: promoters, mutual funds, foreign portfolio investors, insurers, AIFs and individuals.</div>
+    <div class="small"><b>How it is measured:</b> Category totals from the quarterly shareholding pattern XBRL filed with NSE; changes compare the latest quarter with one and four quarters earlier. Pledge share is pledged promoter shares over promoter shares. Names of individual holders are not stored.</div>
+    <div class="small"><b>Why it matters:</b> Rising institutional ownership signals discovery; falling promoter holding or high pledges are warning signs.</div></div>
+  <div id="glossary-insider_buying" class="memo-section"><h4>Insider buying</h4>
+    <div class="small"><b>What it is:</b> Open-market purchases by promoters, directors and key managerial personnel.</div>
+    <div class="small"><b>How it is measured:</b> From SEBI PIT Regulation 7(2) disclosures filed with NSE: value of market purchases minus market sales over 180 days. ESOP allotments and off-market transfers are excluded.</div>
+    <div class="small"><b>Why it matters:</b> Insiders buying with their own money is one of the more credible signals of confidence.</div></div>
+  <div id="glossary-lenses" class="memo-section"><h4>Shortlisting lenses</h4>
+    <div class="small"><b>What it is:</b> Rule-based screens modelled on the published stock selection processes of Indian PMS and AIF houses.</div>
+    <div class="small"><b>How it is measured:</b> Each lens has required rules, supporting rules (a minimum number must pass) and red-flag exclusions (config/shortlist_lenses_v1.yaml). Missing data makes a rule unavailable, never a pass.</div>
+    <div class="small"><b>Why it matters:</b> A disciplined way to find names worth researching; not a recommendation.</div></div>
+  <div id="glossary-fcf_yield" class="memo-section"><h4>Free cash flow yield</h4>
+    <div class="small"><b>What it is:</b> Free cash flow as a share of market value.</div>
+    <div class="small"><b>How it is measured:</b> Latest fiscal year operating cash flow minus capital expenditure, divided by market cap.</div>
+    <div class="small"><b>Why it matters:</b> High and steady free cash flow yield means the price is backed by cash, not just accounting profit.</div></div>
+  <div id="glossary-cash_conversion" class="memo-section"><h4>Cash conversion</h4>
+    <div class="small"><b>What it is:</b> How much of reported profit or EBITDA turns into operating cash.</div>
+    <div class="small"><b>How it is measured:</b> Sum of operating cash flow over three fiscal years divided by the sum of net profit (or EBITDA) over the same years.</div>
+    <div class="small"><b>Why it matters:</b> Profit that does not become cash is a classic warning sign.</div></div>
+  <div id="glossary-dilution" class="memo-section"><h4>Dilution</h4>
+    <div class="small"><b>What it is:</b> Growth in the number of shares.</div>
+    <div class="small"><b>How it is measured:</b> Change in share count over the latest fiscal year.</div>
+    <div class="small"><b>Why it matters:</b> Frequent equity issuance spreads value across more shares.</div></div>
+  <div id="glossary-special_situations" class="memo-section"><h4>Special situations</h4>
+    <div class="small"><b>What it is:</b> Corporate events that can unlock value: demergers, open offers, delistings, buybacks, mergers and changes of control.</div>
+    <div class="small"><b>How it is measured:</b> Read from the company&#39;s exchange announcements of the last 12 months by NSE category and subject text; each must be checked in the filing.</div>
+    <div class="small"><b>Why it matters:</b> Event-driven returns depend less on the market and more on the event.</div></div>
+  <div id="glossary-operating_leverage" class="memo-section"><h4>Operating leverage</h4>
+    <div class="small"><b>What it is:</b> Profit growing faster than revenue.</div>
+    <div class="small"><b>How it is measured:</b> TTM pre-tax profit growth (before exceptional items) minus TTM revenue growth, from quarterly filings.</div>
+    <div class="small"><b>Why it matters:</b> When fixed costs are covered, extra revenue drops to profit, which often precedes a re-rating.</div></div>
+  <div id="glossary-profit_rank_gap" class="memo-section"><h4>Profit rank versus market-cap rank</h4>
+    <div class="small"><b>What it is:</b> How a company&#39;s profit ranks against how its market value ranks.</div>
+    <div class="small"><b>How it is measured:</b> Companies evaluated are ranked by TTM profit and by market cap (1 = largest). Gap = market-cap rank minus profit rank.</div>
+    <div class="small"><b>Why it matters:</b> A large positive gap means the market values the company far below what it earns.</div></div>
+  <div id="glossary-expected_return" class="memo-section"><h4>Scenario values with a horizon (bear, base, bull)</h4>
+    <div class="small"><b>What it is:</b> What a company would be worth in 3 and 5 years under stated mechanical assumptions, and the return a year that implies from today (with pre-tax dividends; price-only shown separately). Not a forecast or target; not back-tested; no probabilities.</div>
+    <div class="small"><b>How it is measured:</b> Revenue from the last four quarters grows at a blend of the 3-year CAGR and TTM growth (at most 3 points above the CAGR), fading towards 10% a year by year 5 but never upwards; net margin is the lower of TTM and the last two quarters (cyclicals also capped at the median fiscal year); the exit P/E keeps today&#39;s multiple if below the size segment&#39;s median since 2021 and moves halfway to it if above. Bear: growth 8 points lower, margin 80%, multiple 75%, half the dividend. Bull: growth 5 points higher, margin 110%, a halfway re-rating for cheap stocks. Bonus issues and splits are not counted as dilution. Lenders (banks whose advances are at least 40% of total assets, and other financial companies whose loans are at least half) use a book-value model instead, ranked separately: book value per share grows at ROE x (1 - payout), with ROE the lower of TTM (reported profit, exceptional gains removed after tax) and the fiscal-year average; the exit P/B keeps today&#39;s P/B below the financial-services index median P/B (Nifty Financial Services for large lenders, Nifty MidSmall Financial Services for the rest) and moves halfway to it above. Lender bear: ROE 3 points lower and P/B 25% lower; bull: ROE 2 points higher; dividends at the latest payout throughout. mbi/research/expected_return.py.</div>
+    <div class="small"><b>Why it matters:</b> A return estimate means little without a horizon and a range. For a stock below the median P/E the base return is roughly revenue growth plus the dividend yield, so the ranking leans towards cheap, high-payout companies; read each row&#39;s caveats.</div></div>
+  <div id="glossary-market_valuation" class="memo-section"><h4>Market valuation by size segment</h4>
+    <div class="small"><b>What it is:</b> How expensive large, mid and small caps are today compared with their own history and with each other.</div>
+    <div class="small"><b>How it is measured:</b> P/E, P/B and dividend yield as published by NSE Indices in the daily index files, month ends from 2012. Percentiles are over the full history and over the period since NSE moved index P/E to consolidated earnings in 2021. Forward returns are the index price return a year over 3 and 5 years after month ends in the same P/E quintile as today, plus that month&#39;s dividend yield (overlapping windows, one market cycle).</div>
+    <div class="small"><b>Why it matters:</b> Starting valuation is one of the few measures with a historical link to subsequent returns over several years; it says little about the next few months.</div></div>
+  <div id="glossary-lens_hidden_champion" class="memo-section"><h4>Under-owned emerging leader</h4>
+    <div class="small"><b>What it is:</b> Small, profitable, high-return companies that mutual funds and foreign investors have not yet found. The bet is that growth and discovery by institutions re-rate the stock as it graduates into the BSE 500.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Equitree Emerging Opportunities (INR 1,000 to 5,000 crore at entry; under-followed companies; exits above PEG 2); Marcellus Little Champs (definition of &#39;superior quality smallcaps&#39;: RoCE 20%, growth 15%, net debt below equity; June 2023 deck); Abakkus (contrarian: be early)</div></div>
+  <div id="glossary-lens_quality_garp" class="memo-section"><h4>Quality growth at a reasonable price</h4>
+    <div class="small"><b>What it is:</b> High return on capital, growth that does not run ahead of that return (so it needs little new equity), earnings backed by cash and a price that does not run far ahead of growth.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Stallion Asset (four Ms: market leadership, opportunity, management, margin of safety); Stallion Asset webinar summary (growth should not exceed return on capital; 20 to 30% growers); Green Lantern Capital (business, management, valuation); Motilal Oswal 30th Wealth Creation Study (trailing PEG below 2 as the valuation step)</div></div>
+  <div id="glossary-lens_pipe_growth_leader" class="memo-section"><h4>Mid and small cap compounder growing faster than its sector</h4>
+    <div class="small"><b>What it is:</b> Companies below the largest small cap that compound profit above 15%, outgrow their own sector, convert profit to cash and are improving returns, bought at no premium to the market multiple.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: ICICI Prudential PMS PIPE Strategy scheme page (market cap below the largest S&amp;P BSE SmallCap stock); ICICI Prudential PMS PIPE presentation (profit compounders above 15%, cash over accounting profit, valuation last); ICICI Prudential PMS PIPE on PMS AIF World (process and track record)</div></div>
+  <div id="glossary-lens_cash_compounder" class="memo-section"><h4>Cash-backed compounder with operating leverage</h4>
+    <div class="small"><b>What it is:</b> Steady, growing operating cash flow, earnings compounding at 15% or more without dilution, margins expanding as revenue grows, falling leverage and rising returns, at a price not far ahead of growth. Cheapness alone is not enough.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Aionios Alpha Fund I investment philosophy (cash flow sustainability first; no mean-reversion investing; probable match for &#39;Aionos&#39;); Aionios Alpha Q2 FY27 investor letter (EBITDA growing faster than revenue and profit faster than EBITDA)</div></div>
+  <div id="glossary-lens_special_situations" class="memo-section"><h4>Special situation with a dated trigger</h4>
+    <div class="small"><b>What it is:</b> A corporate event that can unlock value: demerger, open offer, change of control, delisting, rights issue or a merger with a share exchange ratio. The event comes first; the business must still be sound and the stock must not have run already.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: NeGen Capital on PMS AIF World (special situations: demergers, mergers, restructurings, management changes); NeGen Undiscovered Value Fund on AltPort (open offers, delistings, rights issues, &#39;double special situations&#39;); Vyas, Pathak and Saraf 2015 (demergers by smaller parents: positive announcement returns; large parents not significant)</div></div>
+  <div id="glossary-lens_cash_flow_value" class="memo-section"><h4>Cash-flow value in a downturn</h4>
+    <div class="small"><b>What it is:</b> Businesses with proven returns on capital that trade at very low multiples of cash flow because their industry is out of favour or the stock has fallen hard, ideally with surplus cash. Margin of safety comes from the price paid.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Counter Cyclical Investments on PMS AIF World (&#39;Quality in Downturn&#39;; EV/EBITDA below 5 and EV/operating cash flow below 10; low or negative EV from cash)</div></div>
+  <div id="glossary-lens_profit_rank_gap" class="memo-section"><h4>Profit rank far above market-cap rank</h4>
+    <div class="small"><b>What it is:</b> Rank companies by profit instead of market value: a company among the larger profit earners whose market value ranks far lower is cheap for what it earns, often in an unloved industry. Clean balance sheets and strong promoter holdings preferred.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Aequitas, Siddhartha Bhaiya interview (earnings rank instead of market-cap bucket; strong promoter holdings; high multiples need about 30% growth); Aequitas stops fresh inflows as few stocks qualify (Business Today, Dec 2023)</div></div>
+  <div id="glossary-lens_growth_inflection" class="memo-section"><h4>Growth inflection</h4>
+    <div class="small"><b>What it is:</b> Revenue growth accelerating above its own history with margins expanding, often after a capacity addition, new orders, fresh growth capital or a management change. Captures the &#39;accelerated growth&#39; triggers some houses set automated alerts for.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Carnelian investment philosophy (&#39;Magic&#39;: accelerated-growth triggers); Carnelian investment process (automated alerts; growth, capex, deleveraging and margin screens); Equitree (high-growth inflection)</div></div>
+  <div id="glossary-lens_sqglp_small" class="memo-section"><h4>Small, quality, growth, longevity, price (100x study)</h4>
+    <div class="small"><b>What it is:</b> The profile of India&#39;s enduring 100-baggers at purchase: small and little known, high return on equity, fast earnings growth with operating leverage, low leverage, promoters with skin in the game, bought at a modest P/E.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Motilal Oswal 19th Wealth Creation Study (100x: SQGLP; 47 enduring 100x stocks, 1994 to 2014); Motilal Oswal 30th Wealth Creation Study (QGLP checklist: promoter holding and pledges; trailing PEG below 2)</div></div>
+  <div id="glossary-lens_mid_to_mega" class="memo-section"><h4>Mid to mega: high ROE midcaps at a fair P/E</h4>
+    <div class="small"><b>What it is:</b> Companies ranked 101 to 300 by market value with return on equity above 20% and profit growth above 20%, bought below 25 times earnings: the band from which Motilal Oswal finds many future large caps emerge.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Motilal Oswal 20th Wealth Creation Study (Mid to Mega 6-step screen; publisher backtest 2005 to 2015); Motilal Oswal 29th Wealth Creation Study (market-cap rank crossovers)</div></div>
+  <div id="glossary-lens_economic_profit_midcap" class="memo-section"><h4>Positive economic profit outside the top 200</h4>
+    <div class="small"><b>What it is:</b> Companies ranked 201 to 500 that earn more than a 10% cost of equity, bought at no more than 20 times earnings. Motilal Oswal found the best odds of long-run compounding in this band.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: moderate.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Motilal Oswal 28th Wealth Creation Study (economic profit quintiles and size; 21% of mid and small EP-positive companies compounded at 25%+ over 2013 to 2023, against 5% of the top 200)</div></div>
+  <div id="glossary-lens_coffee_can" class="memo-section"><h4>Coffee Can consistency (3-year proxy)</h4>
+    <div class="small"><b>What it is:</b> Companies that grew revenue at least 10% and earned at least 15% on capital in every recent year, with positive profit and cash flow throughout: steady compounders to hold untouched.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Ambit Coffee Can (10% revenue growth and 15% ROCE in each of 10 years); Marcellus Consistent Compounders (the same twin filter over 10 years)</div></div>
+  <div id="glossary-lens_large_cap_qglp" class="memo-section"><h4>Large-cap quality and growth at a reasonable PEG</h4>
+    <div class="small"><b>What it is:</b> Among the 100 largest companies, those with return on equity above 12%, profit compounding at 20% or more and a trailing PEG below 2: the screen Motilal Oswal&#39;s 30th Wealth Creation Study uses before its management and leadership filters.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Motilal Oswal 30th Wealth Creation Study (QGLP screen: top 500 by market cap, ROE above 12%, profit CAGR 20%+, trailing PEG below 2)</div></div>
+  <div id="glossary-lens_large_cap_consistent" class="memo-section"><h4>Large-cap consistent compounder</h4>
+    <div class="small"><b>What it is:</b> Large companies that grew revenue at least 10% and earned at least 15% on capital in each recent year, convert profit to cash and trade below 35 times earnings: the twin filter behind Marcellus&#39; Consistent Compounders and Ambit&#39;s Coffee Can, applied to the 100 largest companies.</div>
+    <div class="small"><b>How it is measured:</b> Must meet all required rules and the stated number of supporting rules; red flags exclude. Each rule is marked as stated by the source or a system threshold (config/shortlist_lenses_v1.yaml). Evidence: weak.</div>
+    <div class="small"><b>Why it matters:</b> Modelled on: Marcellus Consistent Compounders (10% revenue growth and ROCE above 15% every year for 10 years; forward P/E up to 35 in the current process); Ambit Coffee Can (the same twin filter)</div></div>
+  <div id="glossary-risk_return" class="memo-section"><h4>Risk and return</h4>
+    <div class="small"><b>What it is:</b> One view of what a stock may return over 5 years under stated scenarios and what risks come with it: scenario returns, the excess over the 10-year government bond, volatility, drawdown, beta, balance-sheet health, earnings quality, valuation against DCF, sector peers and its own history, and management checks.</div>
+    <div class="small"><b>How it is measured:</b> Built daily by ./mbi.sh rank from filings published by the as-of date and closing prices (mbi/research/risk_return.py, config/risk_return_v1.yaml).</div>
+    <div class="small"><b>Why it matters:</b> A return figure without its risks is half an answer; the same expected return with twice the volatility or a weak balance sheet is a worse opportunity.</div></div>
+  <div id="glossary-composite_score" class="memo-section"><h4>Composite score (0 to 100)</h4>
+    <div class="small"><b>What it is:</b> Weighted average of seven component scores: expected return 25%, valuation 20%, quality 15%, growth 10%, financial health 10%, management 10%, risk 10%.</div>
+    <div class="small"><b>How it is measured:</b> Each input is ranked against every scored company (a percentile, 0 to 100); a component averages its available inputs; missing components are left out and the weights renormalised. A composite needs at least half of the weighted inputs. Weights are judgement until the learning loop earns a change through its gates.</div>
+    <div class="small"><b>Why it matters:</b> Combines independent views so that no single model (a cheap P/E, a high growth rate) decides the list.</div></div>
+  <div id="glossary-risk_grade" class="memo-section"><h4>Risk grade (A to E)</h4>
+    <div class="small"><b>What it is:</b> A is lowest risk, E highest, from the risk component (volatility, 2-year drawdown, bear-case return, beta).</div>
+    <div class="small"><b>How it is measured:</b> Risk component 80 or more is A, 60 B, 40 C, 20 D, below E; one notch lower for an Altman grey zone, a Beneish watch reading or net debt above 3 times EBITDA; two notches for Altman distress or a Beneish flag (at most two notches in all).</div>
+    <div class="small"><b>Why it matters:</b> Separates how much a stock may return from how rough the ride and how fragile the balance sheet are.</div></div>
+  <div id="glossary-excess_over_gsec" class="memo-section"><h4>Excess over the 10-year G-sec</h4>
+    <div class="small"><b>What it is:</b> Base-case 5-year return a year minus the India 10-year government bond yield.</div>
+    <div class="small"><b>How it is measured:</b> The yield is the latest CCIL observation (CCIL is the only source used). The final list requires at least 4 points.</div>
+    <div class="small"><b>Why it matters:</b> An equity should promise clearly more than a risk-free bond to justify its risk.</div></div>
+  <div id="glossary-return_to_risk" class="memo-section"><h4>Return to risk</h4>
+    <div class="small"><b>What it is:</b> Excess over the 10-year G-sec divided by 1-year annualised volatility of daily returns: an ex-ante Sharpe-style ratio.</div>
+    <div class="small"><b>How it is measured:</b> Volatility from split- and bonus-adjusted NSE closes over the last 252 sessions (at least 120).</div>
+    <div class="small"><b>Why it matters:</b> Ranks opportunities by return per unit of price risk rather than by return alone.</div></div>
+  <div id="glossary-upside_to_downside" class="memo-section"><h4>Upside to downside</h4>
+    <div class="small"><b>What it is:</b> Bull-case 5-year gain divided by the bear-case 5-year loss from today&#39;s price.</div>
+    <div class="small"><b>How it is measured:</b> Shown only when the bear case is below today&#39;s price by more than 2%; otherwise &#39;no modelled loss&#39;.</div>
+    <div class="small"><b>Why it matters:</b> Asymmetry: how much the good case pays for each rupee the bad case costs.</div></div>
+  <div id="glossary-volatility" class="memo-section"><h4>Volatility, drawdown and beta</h4>
+    <div class="small"><b>What it is:</b> Annualised standard deviation of daily returns (1 year), downside volatility (losses only), the worst peak-to-trough fall in 2 years, and beta to the Nifty 50 (1 year).</div>
+    <div class="small"><b>How it is measured:</b> From split- and bonus-adjusted NSE closes; beta needs 120 shared sessions.</div>
+    <div class="small"><b>Why it matters:</b> Shows how rough the path may be and how much a stock moves with the market.</div></div>
+  <div id="glossary-altman_z" class="memo-section"><h4>Altman Z and Z&#39;&#39;</h4>
+    <div class="small"><b>What it is:</b> Bankruptcy-risk scores from the balance sheet and earnings. Z (1968) suits listed manufacturers; Z&#39;&#39; (1995) suits non-manufacturers and emerging-market companies.</div>
+    <div class="small"><b>How it is measured:</b> Z = 1.2 WC/TA + 1.4 RE/TA + 3.3 EBIT/TA + 0.6 MVE/TL + 1.0 Sales/TA (safe above 2.99, distress below 1.81). Z&#39;&#39; = 6.56 WC/TA + 3.26 RE/TA + 6.72 EBIT/TA + 1.05 BookEquity/TL (safe above 2.60, distress below 1.10). Ind AS reserves (OtherEquity) stand in for retained earnings. Not applied to lenders.</div>
+    <div class="small"><b>Why it matters:</b> A cheap stock with a fragile balance sheet can stay cheap or fail; a distress reading in both models vetoes the final list.</div></div>
+  <div id="glossary-piotroski" class="memo-section"><h4>Piotroski F-score (0 to 9)</h4>
+    <div class="small"><b>What it is:</b> Nine pass or fail tests of profitability, leverage and liquidity, and operating efficiency, year on year.</div>
+    <div class="small"><b>How it is measured:</b> ROA positive and improving, operating cash flow positive and above profit, long-term debt to assets down, current ratio up, no new shares, margin up (EBITDA margin for service companies), asset turnover up.</div>
+    <div class="small"><b>Why it matters:</b> Separates improving businesses from deteriorating ones among cheap stocks.</div></div>
+  <div id="glossary-beneish" class="memo-section"><h4>Beneish M-score</h4>
+    <div class="small"><b>What it is:</b> An earnings-manipulation screen from eight indices (receivables, gross margin, asset quality, sales growth, depreciation, overheads, accruals, leverage).</div>
+    <div class="small"><b>How it is measured:</b> Above -1.78 flags a profile like the manipulators in Beneish&#39;s 1999 sample; -2.22 to -1.78 is a watch zone. Fast growers trip it; a flag vetoes the final list only together with high accruals and weak 3-year cash conversion.</div>
+    <div class="small"><b>Why it matters:</b> Prompts a closer read of the notes before trusting reported profit.</div></div>
+  <div id="glossary-sector_relative" class="memo-section"><h4>Relative valuation against sector peers</h4>
+    <div class="small"><b>What it is:</b> P/E, EV/EBITDA and P/B against same-sector companies of similar size (NSE sector; whole sector or size segment when peers are few), and the price the peer medians imply.</div>
+    <div class="small"><b>How it is measured:</b> Positive multiples only (P/E up to 150, EV/EBITDA up to 80). A peer-implied price more than three times or less than a third of the price is marked not comparable and not used.</div>
+    <div class="small"><b>Why it matters:</b> A DCF says what the cash flows may be worth; peers say what the market pays for similar businesses today.</div></div>
+  <div id="glossary-own_pe_history" class="memo-section"><h4>P/E against its own history</h4>
+    <div class="small"><b>What it is:</b> Today&#39;s P/E compared with the company&#39;s own month-end P/E over the last two years.</div>
+    <div class="small"><b>How it is measured:</b> Each month end uses that day&#39;s close, the share count then and the trailing four quarters of profit published by then.</div>
+    <div class="small"><b>Why it matters:</b> A stock cheap against its own past is a different signal from one cheap against its sector.</div></div>
+  <div id="glossary-management_data_score" class="memo-section"><h4>Management and capital allocation (data checks)</h4>
+    <div class="small"><b>What it is:</b> A 0 to 100 score from filed facts: ROCE level and trend, cash conversion, dilution, promoter stake and its change, pledges, insider buying, payout, and how often management&#39;s dated promises were met; auditor or CFO exits and severe forensic flags subtract.</div>
+    <div class="small"><b>How it is measured:</b> Blended 50/50 with the analyst scorecard (10 criteria, evidence and dates required) when one exists. config/risk_return_v1.yaml lists every threshold.</div>
+    <div class="small"><b>Why it matters:</b> Capital allocation and candour drive long-run returns; numbers show part of it, calls and filings the rest.</div></div>
+  <div id="glossary-monitor_flags" class="memo-section"><h4>Monitoring flags</h4>
+    <div class="small"><b>What it is:</b> What changed for a final-list or watchlist company: exchange announcements, results against the base case, new call documents, ownership changes, sharp price falls and news.</div>
+    <div class="small"><b>How it is measured:</b> ./mbi.sh monitor runs daily; thesis checks (results below the bear-case path, auditor or CFO exits, promoter selling, rising pledges, rating actions) come first.</div>
+    <div class="small"><b>Why it matters:</b> A thesis is only as good as its last check; flags are prompts to re-read the evidence, not trade signals.</div></div>
+  <div id="glossary-learning_loop" class="memo-section"><h4>Learning loop</h4>
+    <div class="small"><b>What it is:</b> Every ranking is stored and later scored against what prices actually did; challengers (re-weighted scores and a small neural network) are tested out of sample.</div>
+    <div class="small"><b>How it is measured:</b> Rank correlation (IC) between each score and the next 21, 63, 126 and 252 sessions&#39; return over the Nifty 500; new weights replace the current ones only when they beat them out of sample on at least 12 dates with a t-statistic of 2 or more, and then by at most 0.10 per component.</div>
+    <div class="small"><b>Why it matters:</b> The system should get better from evidence, not from hindsight or tinkering.</div></div>
+  <div id="glossary-analyst_view" class="memo-section"><h4>Analyst view from the calls</h4>
+    <div class="small"><b>What it is:</b> A review of the latest earnings-call transcripts and presentations: management&#39;s guidance against the scenario model&#39;s assumptions, one-off or temporary profits, a dated promise ledger and a ten-criterion management scorecard.</div>
+    <div class="small"><b>How it is measured:</b> Written by an analyst agent from NSE-filed documents with page citations, checked by an independent agent against the transcripts, then imported with ./mbi.sh import-analysis. When guidance is below the model&#39;s base case, the company is kept off the final list until the base case is revised.</div>
+    <div class="small"><b>Why it matters:</b> The scenario model extrapolates recent filings; management often says on the call that recent profits will not repeat (an exclusivity ending, a commodity price falling).</div></div>
+  <div id="glossary-model_portfolio" class="memo-section"><h4>Model portfolio (simulation)</h4>
+    <div class="small"><b>What it is:</b> A paper portfolio of INR 1,00,000 that holds only final-list names passing a strict conviction filter, next to two shadows: the same money in NIFTYBEES, and an equal weight of the whole final list.</div>
+    <div class="small"><b>How it is measured:</b> Decisions are timestamped and use only data recorded before them; orders fill at the next session&#39;s VWAP plus slippage with every exchange charge and tax computed from the verified cost schedule. Policy: config/model_portfolio_v1.yaml.</div>
+    <div class="small"><b>Why it matters:</b> It tests whether the research would have made money after costs against investable alternatives. It is a simulation: no order is placed and no return is promised.</div></div>
+  <div id="glossary-portfolio_risk_stats" class="memo-section"><h4>Volatility, Sharpe and Sortino</h4>
+    <div class="small"><b>What it is:</b> How much the simulated portfolio&#39;s value swings, and its return per unit of that risk above the 3-month Treasury bill.</div>
+    <div class="small"><b>How it is measured:</b> Daily returns of the NAV; volatility is the standard deviation times the square root of 252; Sharpe divides the annualised excess over the FBIL 3-month T-bill by it; Sortino uses only the downside. Shown after 60 sessions.</div>
+    <div class="small"><b>Why it matters:</b> Two portfolios with the same return are not equal if one needed twice the risk to get there.</div></div>
+  <div id="glossary-var_cvar" class="memo-section"><h4>Value at risk and expected shortfall</h4>
+    <div class="small"><b>What it is:</b> VaR is the loss a session (or 10 sessions) should not exceed on 95% or 99% of occasions; CVaR is the average loss on the occasions it does.</div>
+    <div class="small"><b>How it is measured:</b> Historical: the empirical quantile of daily returns (10-day from overlapping 10-session returns). Parametric: a normal distribution with mean zero, 10-day scaled by the square root of 10. Shown after 60 sessions.</div>
+    <div class="small"><b>Why it matters:</b> It puts a rupee figure on a bad day or a bad fortnight, which volatility alone does not.</div></div>
+  <div id="glossary-ex_ante_risk" class="memo-section"><h4>Ex-ante risk and concentration</h4>
+    <div class="small"><b>What it is:</b> The risk the current holdings would have had over the past year, how much each name contributes, and how concentrated the portfolio is.</div>
+    <div class="small"><b>How it is measured:</b> 252 sessions of daily returns, with the covariance shrunk towards a constant-correlation target (Ledoit and Wolf) so a few odd sessions do not dominate; effective names is 1 divided by the sum of squared weights; days to exit assume selling 10% of the median daily volume.</div>
+    <div class="small"><b>Why it matters:</b> Concentration and correlated holdings are where small portfolios take hidden risk.</div></div>
+  <div id="glossary-tracking_error" class="memo-section"><h4>Tracking error, beta and information ratio</h4>
+    <div class="small"><b>What it is:</b> How far and how consistently the model portfolio moves away from a benchmark: NIFTYBEES bought on the same session, and the Nifty 50 and Nifty 500 price indices.</div>
+    <div class="small"><b>How it is measured:</b> Tracking error is the annualised standard deviation of the daily return difference; the information ratio divides the annualised difference by it; beta and correlation come from daily returns. Shown after 60 sessions.</div>
+    <div class="small"><b>Why it matters:</b> Beating an index by luck looks the same as beating it by skill for a while; these numbers show how much noise to expect.</div></div>
+  <div id="glossary-after_tax_value" class="memo-section"><h4>After-tax liquidation value</h4>
+    <div class="small"><b>What it is:</b> What the investor would keep if every holding were sold at today&#39;s close: NAV less the selling charges and the tax the sale would add this financial year.</div>
+    <div class="small"><b>How it is measured:</b> FIFO lots; short-term gains at 20% and long-term (held more than 12 months) at 12.5% above INR 1,25,000 a year, plus 4% cess; losses set off as the law allows. Shown with and without the exemption, because the investor&#39;s other gains may use it.</div>
+    <div class="small"><b>Why it matters:</b> Taxes are the investor&#39;s cost, not the portfolio&#39;s, but they decide what a gain is really worth.</div></div>
+  <div id="glossary-doubling_probability" class="memo-section"><h4>Expected return and the doubling horizon</h4>
+    <div class="small"><b>What it is:</b> Three views of the yearly return: the holdings&#39; model estimate, the Nifty 500&#39;s past growth plus dividends (the anchor), and a blend that leans on the anchor because the model is not calibrated.</div>
+    <div class="small"><b>How it is measured:</b> Shrunk estimate = 0.25 x model + 0.75 x anchor. The probability of doubling comes from 10,000 paths of 12-month blocks of the Nifty 500&#39;s monthly history since November 2015, shifted to the shrunk estimate, with a fixed seed.</div>
+    <div class="small"><b>Why it matters:</b> It sets a realistic horizon. These are estimates with the status unvalidated, never a promise.</div></div>
+  <div id="glossary-failure_tests" class="memo-section"><h4>Failure tests</h4>
+    <div class="small"><b>What it is:</b> Pre-set tests that separate a real failure of the approach from noise.</div>
+    <div class="small"><b>How it is measured:</b> After 252 sessions, excess return over NIFTYBEES below -1.65 x tracking error x the square root of the years; NAV below the bear-case path at two consecutive scheduled reviews; or a drawdown more than 1.5 times the benchmark&#39;s.</div>
+    <div class="small"><b>Why it matters:</b> Deciding in advance what counts as failure stops both early panic and endless excuses.</div></div>
+  <div id="glossary-brinson_fachler" class="memo-section"><h4>Attribution (Brinson-Fachler)</h4>
+    <div class="small"><b>What it is:</b> Splits the model portfolio&#39;s lead or lag against the equal-weight shadow into sector allocation, stock selection within sectors, and their interaction.</div>
+    <div class="small"><b>How it is measured:</b> Daily sector weights at the previous close and each position&#39;s return, linked over time with Carino factors so the parts add up exactly; the gap to the NAV-based figure (fills, charges, timing) is shown as a residual.</div>
+    <div class="small"><b>Why it matters:</b> It shows whether the filter added value by picking sectors or by picking stocks.</div></div>
+  <div id="glossary-filter_learning" class="memo-section"><h4>Learning from the filter</h4>
+    <div class="small"><b>What it is:</b> Whether names each eligibility rule excluded went on to do worse than the names it let through.</div>
+    <div class="small"><b>How it is measured:</b> For every decision, the rank correlation between passing the rule and the next 21, 63, 126 and 252 sessions&#39; return over the Nifty 500, stored with the ranking&#39;s learning scores.</div>
+    <div class="small"><b>Why it matters:</b> A rule that keeps out winners costs money; a lesson changes a rule only through a new policy version after enough dates.</div></div>
+  </div>
+</section>
+
+      <div class="footer-note">LIMITED-DATA MODE: end-of-day public sources; not real time. Page rendered 27 Nov 2026 15:56 IST. Model outputs are estimates, not guarantees.</div>
+    </main>
+  </div>
+</div>
+
+<script>window.MBI_DATA = {};window.MBI_RAW = {};window.MBI_FETCH = function (u) { var d = window.MBI_RAW[u]; return Promise.resolve({json: function () { return Promise.resolve(d === undefined ? {} : d); }}); };</script><script>/* Dashboard behaviour: sortable/filterable tables, tabs, charts, persisted preferences. */
+(function () {
+  "use strict";
+
+  function store(key, val) { try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); } catch (e) { return null; } }
+  // with scripts running, tab panels are hidden until chosen; without them (blocked scripts) every section stays visible
+  document.documentElement.classList.add("js");
+
+  // ---------------------------------------------------------------- sidebar
+  var btn = document.querySelector(".menu-btn");
+  if (btn) btn.addEventListener("click", function () { document.querySelector(".sidebar").classList.toggle("open"); });
+
+  // ---------------------------------------------------------------- theme toggle
+  var saved = store("mbi-theme");
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+  var tbtn = document.getElementById("theme-toggle");
+  if (tbtn) tbtn.addEventListener("click", function () {
+    var cur = document.documentElement.getAttribute("data-theme");
+    var dark = cur ? cur === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    var next = dark ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", next);
+    store("mbi-theme", next);
+    location.reload();
+  });
+
+  // ---------------------------------------------------------------- sortable tables
+  function cellValue(td) {
+    var v = td.getAttribute("data-v");
+    if (v === null) v = td.textContent.trim();
+    var cleaned = String(v).replace(/[,%+\s▲▼]/g, "");
+    var n = Number(cleaned);
+    return cleaned !== "" && !isNaN(n) ? n : String(v).toLowerCase();
+  }
+  document.querySelectorAll("table.sortable").forEach(function (table) {
+    table.querySelectorAll("th").forEach(function (th, idx) {
+      if (th.classList.contains("nosort")) return;
+      th.classList.add("sortable");
+      th.addEventListener("click", function () {
+        var tbody = table.tBodies[0];
+        var rows = Array.prototype.slice.call(tbody.rows);
+        var asc = !th.classList.contains("sort-asc");
+        table.querySelectorAll("th").forEach(function (h) { h.classList.remove("sort-asc", "sort-desc"); });
+        th.classList.add(asc ? "sort-asc" : "sort-desc");
+        rows.sort(function (a, b) {
+          var x = cellValue(a.cells[idx]), y = cellValue(b.cells[idx]);
+          if (x === "" || x === "n/a") return 1;
+          if (y === "" || y === "n/a") return -1;
+          if (x < y) return asc ? -1 : 1;
+          if (x > y) return asc ? 1 : -1;
+          return 0;
+        });
+        rows.forEach(function (r) { tbody.appendChild(r); });
+      });
+    });
+  });
+
+  // ---------------------------------------------------------------- table filters
+  document.querySelectorAll("[data-filter-for]").forEach(function (input) {
+    var table = document.getElementById(input.getAttribute("data-filter-for"));
+    if (!table) return;
+    var apply = function () {
+      var text = (document.querySelector("[data-filter-for='" + table.id + "'][type=search]") || {}).value || "";
+      text = text.toLowerCase();
+      var selects = document.querySelectorAll("select[data-filter-for='" + table.id + "']");
+      Array.prototype.forEach.call(table.tBodies[0].rows, function (row) {
+        var ok = !text || row.textContent.toLowerCase().indexOf(text) >= 0;
+        selects.forEach(function (sel) {
+          var col = sel.getAttribute("data-col");
+          if (sel.value && ok) ok = (row.getAttribute("data-" + col) || "").split(" ").indexOf(sel.value) >= 0;
+        });
+        row.style.display = ok ? "" : "none";
+      });
+    };
+    input.addEventListener("input", apply);
+    input.addEventListener("change", apply);
+  });
+
+  // ---------------------------------------------------------------- linked items clear the sticky top bar
+  var topbar = document.querySelector(".topbar");
+  function padTop() { if (topbar) document.documentElement.style.scrollPaddingTop = (topbar.offsetHeight + 8) + "px"; }
+  padTop();
+  window.addEventListener("resize", padTop);
+
+  // ---------------------------------------------------------------- tabs (hash-addressable, remembered per page)
+  document.querySelectorAll(".tabs").forEach(function (tabs) {
+    if (tabs.classList.contains("tabs-css")) return;   // exported pages: radio-button tabs driven by CSS alone
+    var key = "mbi-tab-" + location.pathname;
+    function show(id) {
+      tabs.querySelectorAll("a").forEach(function (a) { a.classList.toggle("active", a.getAttribute("href") === "#" + id); });
+      document.querySelectorAll(".tabpanel").forEach(function (p) { p.classList.toggle("active", p.id === id); });
+      store(key, id);
+      window.dispatchEvent(new Event("resize"));
+    }
+    tabs.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        show(a.getAttribute("href").slice(1));
+        try { history.replaceState(null, "", a.getAttribute("href")); } catch (err) { /* sandboxed viewers refuse history changes */ }
+      });
+    });
+    var initial = (location.hash || "").slice(1) || store(key);
+    var first = tabs.querySelector("a");
+    // a hash may name an element inside a panel (methodology#glossary-nifty50): open its panel, then scroll to it
+    var target = initial ? document.getElementById(initial) : null, inner = null;
+    if (target && !target.classList.contains("tabpanel")) {
+      var panel = target.closest ? target.closest(".tabpanel") : null;
+      inner = panel ? target : null;
+      initial = panel ? panel.id : null;
+    }
+    if (!initial || !document.getElementById(initial)) initial = first ? first.getAttribute("href").slice(1) : null;
+    if (initial) show(initial);
+    if (inner) setTimeout(function () { inner.scrollIntoView(); }, 0);
+  });
+
+  // ---------------------------------------------------------------- date picker persistence
+  var datePick = document.getElementById("as-of-date");
+  if (datePick) datePick.addEventListener("change", function () { store("mbi-date", datePick.value); });
+
+  // ---------------------------------------------------------------- charts
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function baseChart(el, height) {
+    return LightweightCharts.createChart(el, {
+      height: height || el.clientHeight || 360,
+      layout: { background: { type: "solid", color: "transparent" }, textColor: css("--text-2"), fontSize: 11 },
+      grid: { vertLines: { color: css("--border") }, horzLines: { color: css("--border") } },
+      rightPriceScale: { borderColor: css("--border") },
+      timeScale: { borderColor: css("--border") },
+      crosshair: { mode: 0 },
+      autoSize: true,
+    });
+  }
+  function seq(dates, values) {
+    var out = [];
+    for (var i = 0; i < dates.length; i++) if (values[i] !== null && values[i] !== undefined) out.push({ time: dates[i], value: values[i] });
+    return out;
+  }
+
+  window.MBI = {
+    candles: function (el, data, opts) {
+      opts = opts || {};
+      if (!window.LightweightCharts || !data || data.status !== "ok") { el.innerHTML = '<div class="empty"><strong>Chart unavailable</strong>' + (data && data.status ? "No verified price history." : "") + "</div>"; return; }
+      var chart = baseChart(el);
+      var s = chart.addCandlestickSeries({ upColor: css("--pos"), downColor: css("--neg"), borderVisible: false, wickUpColor: css("--pos"), wickDownColor: css("--neg") });
+      s.setData(data.dates.map(function (d, i) { var o = data.ohlc[i]; return { time: d, open: o[0], high: o[1], low: o[2], close: o[3] }; }));
+      var colors = { sma20: "#c084fc", sma50: "#f59e0b", sma200: "#2563eb" };
+      ["sma20", "sma50", "sma200"].forEach(function (k) { if (data[k]) chart.addLineSeries({ color: colors[k], lineWidth: 1, priceLineVisible: false, lastValueVisible: false }).setData(seq(data.dates, data[k])); });
+      if (data.bb_upper && opts.bands !== false) {
+        [data.bb_upper, data.bb_lower].forEach(function (arr) { chart.addLineSeries({ color: css("--text-3"), lineWidth: 1, lineStyle: 2, priceLineVisible: false, lastValueVisible: false }).setData(seq(data.dates, arr)); });
+      }
+      var vol = chart.addHistogramSeries({ priceScaleId: "vol", priceFormat: { type: "volume" }, color: css("--border") });
+      chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+      vol.setData(seq(data.dates, data.volume).map(function (p) { return { time: p.time, value: p.value, color: css("--text-3") + "55" }; }));
+      (opts.zones || []).forEach(function (z) {
+        var col = z.kind === "support" ? css("--pos") : css("--neg");
+        s.createPriceLine({ price: z.high, color: col, lineWidth: 1, lineStyle: 1, axisLabelVisible: false, title: z.kind + " zone" });
+        s.createPriceLine({ price: z.low, color: col, lineWidth: 1, lineStyle: 1, axisLabelVisible: false, title: "" });
+      });
+      (opts.levels || []).forEach(function (lv) { if (lv.price) s.createPriceLine({ price: lv.price, color: lv.color || css("--accent"), lineWidth: 2, lineStyle: 2, axisLabelVisible: true, title: lv.title }); });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+    line: function (el, series, opts) {
+      opts = opts || {};
+      if (!window.LightweightCharts || !series || !series.length || !series.some(function (s) { return s.data && s.data.length; })) { el.innerHTML = '<div class="empty"><strong>No data</strong>' + (opts.empty || "No verified observations stored for this series.") + "</div>"; return; }
+      var chart = baseChart(el);
+      var palette = [css("--accent"), "#f59e0b", css("--pos"), css("--unverified"), css("--neg")];
+      series.forEach(function (s, i) {
+        var ls = chart.addLineSeries({ color: s.color || palette[i % palette.length], lineWidth: 2, lineStyle: s.dashed ? 2 : 0, title: s.name || "", priceLineVisible: false });
+        ls.setData(s.data);
+      });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+    rsi: function (el, data) {
+      if (!window.LightweightCharts || !data || data.status !== "ok") return;
+      var chart = baseChart(el);
+      var s = chart.addLineSeries({ color: css("--unverified"), lineWidth: 1, priceLineVisible: false });
+      s.setData(seq(data.dates, data.rsi));
+      [30, 70].forEach(function (v) { s.createPriceLine({ price: v, color: css("--text-3"), lineWidth: 1, lineStyle: 2, axisLabelVisible: true, title: "" }); });
+      chart.timeScale().fitContent();
+      return chart;
+    },
+  };
+})();
+
+/* Generic data-driven charts: <div class="chart" data-chart='[{"kind":"series","id":"US_TSY_10Y","name":"US 10Y"}]'></div>
+   kinds: series (macro_observations), index (index_bars close), spread (a minus b in bps), portfolio (model portfolio NAV,
+   rebased indices and estimate paths in INR). Range buttons: .range-btns button[data-range]. */
+(function () {
+  var cache = {};
+  function url(spec) {
+    if (spec.kind === "index") return "/api/index/" + encodeURIComponent(spec.id);
+    if (spec.kind === "spread") return "/api/spread?a=" + encodeURIComponent(spec.a) + "&b=" + encodeURIComponent(spec.b);
+    if (spec.kind === "portfolio") return "/api/portfolio/series/" + encodeURIComponent(spec.id);
+    return "/api/series/" + encodeURIComponent(spec.id);
+  }
+  function get(spec) {
+    var u = url(spec);
+    if (window.MBI_DATA) { var d = window.MBI_DATA[u]; return Promise.resolve(d ? (d.data || []) : []); }
+    if (window.MBI_DATA_MAP) { if (!window.MBI_DATA_MAP[u]) return Promise.resolve([]); u = window.MBI_DATA_MAP[u]; }
+    if (!cache[u]) cache[u] = fetch(u).then(function (r) { return r.json(); }).then(function (j) { return j.data || []; }).catch(function () { return []; });
+    return cache[u];
+  }
+  function cutoff(range) {
+    if (!range || range === "all") return null;
+    var d = new Date(); var m = { "1m": 1, "3m": 3, "6m": 6, "1y": 12, "2y": 24 }[range] || 12;
+    d.setMonth(d.getMonth() - m); return d.toISOString().slice(0, 10);
+  }
+  function draw(el, range) {
+    var specs; try { specs = JSON.parse(el.getAttribute("data-chart")); } catch (e) { return; }
+    Promise.all(specs.map(get)).then(function (all) {
+      var c = cutoff(range);
+      var series = specs.map(function (s, i) {
+        var data = all[i].filter(function (p) { return p.value !== null && (!c || p.time >= c); });
+        if (s.rebase && data.length) { var b = data[0].value; data = data.map(function (p) { return { time: p.time, value: +(p.value / b * 100).toFixed(3) }; }); }
+        return { name: s.name || s.id || (s.a + " - " + s.b), data: data, dashed: !!s.dashed, color: s.color };
+      });
+      el.innerHTML = "";
+      if (window.MBI) window.MBI.line(el, series, { empty: el.getAttribute("data-empty") || "History builds up with each daily refresh." });
+      var last = el.parentNode.querySelector(".chart-last");
+      if (last) {
+        last.textContent = series.filter(function (s) { return s.data.length; }).map(function (s) {
+          var p = s.data[s.data.length - 1]; return s.name + ": " + p.value + " (" + p.time + ")";
+        }).join("  |  ");
+      }
+    });
+  }
+  function init() {
+    document.querySelectorAll("[data-chart]").forEach(function (el) {
+      var card = el.closest(".card") || el.parentNode;
+      var range = el.getAttribute("data-range") || "1y";
+      var btns = card.querySelectorAll(".range-btns button");
+      btns.forEach(function (b) {
+        if (b.getAttribute("data-range") === range) b.classList.add("active");
+        b.addEventListener("click", function () {
+          btns.forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active");
+          draw(el, b.getAttribute("data-range"));
+        });
+      });
+      // draw when visible (tab panels hidden at load have zero width)
+      if (el.offsetParent !== null) draw(el, range);
+      else el.setAttribute("data-pending", range);
+    });
+    function drawPending() {
+      setTimeout(function () {
+        document.querySelectorAll("[data-pending]").forEach(function (el) {
+          if (el.offsetParent !== null) { var r = el.getAttribute("data-pending"); el.removeAttribute("data-pending"); draw(el, r); }
+        });
+      }, 30);
+    }
+    document.querySelectorAll(".tabs a").forEach(function (a) { a.addEventListener("click", drawPending); });
+    document.querySelectorAll("input.tabradio").forEach(function (r) { r.addEventListener("change", drawPending); });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init); else init();
+})();
+</script>
+
+<div class="footer-note" style="padding:12px 24px">Static copy exported from the local dashboard; interactive search, corrections and research requests work only in the local app. Public edition: charts and data files include only series whose publishers allow redistribution.</div><script>(function(){function go(){var h=(location.hash||"").slice(1);try{h=decodeURIComponent(h)}catch(e){}if(!h)return;var r=document.getElementById("tab-"+h),el=null;if(!r){el=document.getElementById(h);var p=el&&el.closest?el.closest(".tabpanel"):null;r=p?document.getElementById("tab-"+p.id):null;}if(r&&r.type==="radio"){r.checked=true;if(el)el.scrollIntoView();}}go();window.addEventListener("hashchange",go);})();</script></body>
+</html>
